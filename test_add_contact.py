@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
+import unittest
 
 class TestAddContact(unittest.TestCase):
     def setUp(self): # функция инициализации теста
@@ -21,29 +17,31 @@ class TestAddContact(unittest.TestCase):
         self.logout(wd)
 
     def create_contact(self, wd):
+        # init contact creation
         wd.find_element_by_link_text("add new").click()
+        # fill contacts form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(u"Томас")
+        wd.find_element_by_name("firstname").send_keys("Томас")
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(u"Джеффри")
+        wd.find_element_by_name("middlename").send_keys("Джеффри")
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(u"Хэнкс")
+        wd.find_element_by_name("lastname").send_keys("Хэнкс")
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(u"Том")
+        wd.find_element_by_name("nickname").send_keys("Том")
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys(u"Номер Томми")
+        wd.find_element_by_name("title").send_keys("Номер Томми")
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(u"Голливуд")
+        wd.find_element_by_name("company").send_keys("Голливуд")
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(u"Лос-Анжелес")
+        wd.find_element_by_name("address").send_keys("Лос-Анжелес")
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
         wd.find_element_by_name("home").send_keys("111222333")
@@ -65,7 +63,8 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("email3").send_keys("tfhanks@yahoo.com")
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys("home_page_url")
+        wd.find_element_by_name("homepage").send_keys("https://ru.wikipedia.org/wiki/%D0%A5%D1%8D%D0%BD%D0%BA%D1%81,_%D0%A2%D0%BE%D0%BC")
+        # entering bday from picklist
         wd.find_element_by_name("bday").click()
         Select(wd.find_element_by_name("bday")).select_by_visible_text("10")
         wd.find_element_by_xpath("//option[@value='10']").click()
@@ -75,6 +74,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("1965")
+        # entering anniversary day from picklist
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text("10")
         wd.find_element_by_xpath("//div[@id='content']/form/select[3]/option[12]").click()
@@ -84,6 +84,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys("2015")
+        # entering secondary block
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
