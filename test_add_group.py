@@ -62,7 +62,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
     def open_home_page(self, wd):
-        wd.get("http://localhost/addressbook/group.php")
+        wd.get("http://localhost/addressbook/")
 
     def tearDown(self): # функция очистки после прохождения теста
         self.wd.quit()
