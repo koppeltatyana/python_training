@@ -9,17 +9,21 @@ class TestAddGroup(unittest.TestCase):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    
     def test_add_group(self):
         wd = self.wd
+        # open homepage
         wd.get("http://localhost/addressbook/group.php")
+        # login
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
+        # open group page
         wd.find_element_by_link_text("groups").click()
+        # init group creation
         wd.find_element_by_name("new").click()
+        # fill group form
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys("asd")
@@ -30,8 +34,11 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys("asd")
         wd.find_element_by_id("content").click()
+        # submit group creation
         wd.find_element_by_name("submit").click()
+        # return to group page
         wd.find_element_by_link_text("group page").click()
+        # logout
         wd.find_element_by_link_text("Logout").click()
     
     def is_element_present(self, how, what):
