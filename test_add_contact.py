@@ -14,12 +14,13 @@ class TestAddContact(unittest.TestCase):
     
     def test_add_contact(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_xpath("//input[@value='Login']").click()
+        self.open_home_page(wd)
+        self.login(wd)
+        self.create_contact(wd)
+        self.return_to_home_page(wd)
+        self.logout(wd)
+
+    def create_contact(self, wd):
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -94,9 +95,23 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(u"фыавфыгнврфы с с")
         wd.find_element_by_xpath("//input[21]").click()
+
+    def return_to_home_page(self, wd):
         wd.find_element_by_link_text("home").click()
+
+    def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
-    
+
+    def login(self, wd):
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_xpath("//input[@value='Login']").click()
+
+    def open_home_page(self, wd):
+        wd.get("http://localhost/addressbook/")
+
     def tearDown(self): # функция очистки после прохождения теста
         self.wd.quit()
 
