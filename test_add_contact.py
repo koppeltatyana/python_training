@@ -13,7 +13,15 @@ class TestAddContact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstname='Томас', middlename='Джеффри', lastname='Хэнкс', nickname='Том', photo='', title='Номер Томми', company='Голливуд', address='Лос-Анжелес', home='111222333', mobile='+1465789159', work='789456123', fax='546546546', email='thomas.hanks@gmail.com"', email2='tommi.king@gmail.com', email3='tfhanks@yahoo.com"', homepage='https://en.wikipedia.org/wiki/Tom_Hanks', bday='10', bmonth='October', byear='1965', aday='10', amonth='October', ayear='2025', address2='Пляжная ул.', phone2='789456123', notes='Qweashgdfaghcxhgzctafsd'))
+        self.create_contact(wd, Contact(firstname='Томас', middlename='Джеффри', lastname='Хэнкс', nickname='Том', photo='', title='Номер Томми', company='Голливуд', address='Лос-Анжелес', home='111222333', mobile='+1465789159', work='789456123', fax='546546546', email='thomas.hanks@gmail.com', email2='tommi.king@gmail.com', email3='tfhanks@yahoo.com', homepage='https://en.wikipedia.org/wiki/Tom_Hanks', bday='10', bmonth='October', byear='1965', aday='10', amonth='October', ayear='2025', address2='Пляжная ул.', phone2='789456123', notes='Qweashgdfaghcxhgzctafsd'))
+        self.return_to_home_page(wd)
+        self.logout(wd)
+
+    def test_add_empty_contact(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.create_contact(wd, Contact(firstname='', middlename='', lastname='', nickname='', photo='', title='', company='', address='', home='', mobile='', work='', fax='', email='', email2='', email3='', homepage='', bday='', bmonth='', byear='', aday='', amonth='', ayear='', address2='', phone2='', notes=''))
         self.return_to_home_page(wd)
         self.logout(wd)
 
