@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import unittest
+from contact import Contact
 
 class TestAddContact(unittest.TestCase):
     def setUp(self): # функция инициализации теста
@@ -11,7 +12,7 @@ class TestAddContact(unittest.TestCase):
     def test_add_contact(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd)
+        self.login(wd, username="admin", userpassword="secret")
         self.create_contact(wd)
         self.return_to_home_page(wd)
         self.logout(wd)
@@ -103,11 +104,11 @@ class TestAddContact(unittest.TestCase):
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def login(self, wd):
+    def login(self, wd, username, userpassword):
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys(userpassword)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self, wd):
