@@ -5,7 +5,7 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest
 
 class TestAddGroup(unittest.TestCase):
-    def setUp(self):
+    def setUp(self): # функция инициализации
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
@@ -44,7 +44,7 @@ class TestAddGroup(unittest.TestCase):
         except NoAlertPresentException as e: return False
         return True
     
-    def tearDown(self):
+    def tearDown(self): # функция очистки после прохождения теста
         self.wd.quit()
 
 if __name__ == "__main__":
