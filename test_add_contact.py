@@ -10,18 +10,17 @@ class TestAddContact(unittest.TestCase):
         self.wd.implicitly_wait(30)
     
     def test_add_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(first_name='Томас', middle_name='Джеффри', last_name='Хэнкс', nickname='Том', photo='', title='Номер Томми', company='Голливуд', address='Лос-Анжелес', home_number='111222333', mobile_number='+1465789159', work_number='789456123', fax='546546546', email='thomas.hanks@gmail.com', email2='tommi.king@gmail.com', email3='tfhanks@yahoo.com', homepage='https://en.wikipedia.org/wiki/Tom_Hanks', bday='10', bmonth='October', byear='1965', aday='10', amonth='October', ayear='2025', address2='Пляжная ул.', phone2='789456123', notes='Qweashgdfaghcxhgzctafsd'))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(first_name='Томас', middle_name='Джеффри', last_name='Хэнкс', nickname='Том', photo='', title='Номер Томми', company='Голливуд', address='Лос-Анжелес', home_number='111222333', mobile_number='+1465789159', work_number='789456123', fax='546546546', email='thomas.hanks@gmail.com', email2='tommi.king@gmail.com', email3='tfhanks@yahoo.com', homepage='https://en.wikipedia.org/wiki/Tom_Hanks', bday='10', bmonth='October', byear='1965', aday='10', amonth='October', ayear='2025', address2='Пляжная ул.', phone2='789456123', notes='Qweashgdfaghcxhgzctafsd'))
+        self.logout()
 
     def test_add_empty_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(first_name='', middle_name='', last_name='', nickname='', photo='', title='', company='', address='', home_number='', mobile_number='', work_number='', fax='', email='', email2='', email3='', homepage='', bday='', bmonth='-', byear='', aday='', amonth='-', ayear='', address2='', phone2='', notes=''))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(first_name='', middle_name='', last_name='', nickname='', photo='', title='', company='', address='', home_number='', mobile_number='', work_number='', fax='', email='', email2='', email3='', homepage='', bday='', bmonth='-', byear='', aday='', amonth='-', ayear='', address2='', phone2='', notes=''))
+        self.logout()
 
-    def create_contact(self, wd, contact):
+    def create_contact(self, contact):
+        wd = self.wd
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         # fill contacts form
@@ -99,13 +98,16 @@ class TestAddContact(unittest.TestCase):
         self.return_to_home_page(wd)
 
 
-    def return_to_home_page(self, wd):
+    def return_to_home_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("home").click()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def login(self, wd, username, password):
+    def login(self, username, password):
+        wd = self.wd
         self.open_home_page(wd)
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -114,6 +116,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self, wd):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
     def tearDown(self): # функция очистки после прохождения теста
