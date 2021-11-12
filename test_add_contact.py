@@ -95,7 +95,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_xpath("//input[21]").click()
-        self.return_to_home_page(wd)
+        self.return_to_home_page()
 
 
     def return_to_home_page(self):
@@ -108,14 +108,14 @@ class TestAddContact(unittest.TestCase):
 
     def login(self, username, password):
         wd = self.wd
-        self.open_home_page(wd)
+        self.open_home_page()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
 
