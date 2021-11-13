@@ -30,6 +30,8 @@ class GroupHelper:
         # submit group creation
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
+        self.app.return_to_home_page()
+
 
     def delete_first_group(self):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
@@ -37,3 +39,4 @@ class GroupHelper:
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+        self.app.return_to_home_page()
