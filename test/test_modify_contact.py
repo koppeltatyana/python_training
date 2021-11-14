@@ -22,26 +22,54 @@ def test_modify_first_contact_lastname(app):
 def test_modify_first_contact_nickname(app):
     app.session.login(username="admin", password="secret")
     # вместо передачи параметров передаем объект класса Group
-    app.contact.modify_first_contact_nickname(new_nickname='Новая фамилия контакта')
+    app.contact.modify_first_contact_nickname(new_nickname='Новый ник контакта')
     app.session.logout()
 
 
 def test_modify_first_contact_title(app):
     app.session.login(username="admin", password="secret")
     # вместо передачи параметров передаем объект класса Group
-    app.contact.modify_first_contact_title(new_title='Новая фамилия контакта')
+    app.contact.modify_first_contact_title(new_title='Новая титульная информация контакта')
     app.session.logout()
 
 
 def test_modify_first_contact_company(app):
     app.session.login(username="admin", password="secret")
     # вместо передачи параметров передаем объект класса Group
-    app.contact.modify_first_contact_company(new_company='Новая фамилия контакта')
+    app.contact.modify_first_contact_company(new_company='Новая компания контакта')
     app.session.logout()
 
 
 def test_modify_first_contact_address(app):
     app.session.login(username="admin", password="secret")
     # вместо передачи параметров передаем объект класса Group
-    app.contact.modify_first_contact_address(new_address='Новая фамилия контакта')
+    app.contact.modify_first_contact_address(new_address='Новый адрес контакта')
+    app.session.logout()
+
+
+def test_modify_first_contact_home_number(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_home_number(new_home_number='11112222333')
+    app.session.logout()
+
+
+def test_modify_first_contact_mobile_number(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_mobile_number(new_mobile_number='2222333344455')
+    app.session.logout()
+
+
+def test_modify_first_contact_work_number(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_work_number(new_work_number='333444555666')
+    app.session.logout()
+
+
+def test_modify_first_contact_fax(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_fax(new_fax='444555666777')
     app.session.logout()

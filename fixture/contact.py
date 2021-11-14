@@ -160,3 +160,43 @@ class ContactHelper:
         wd.find_element_by_name("address").send_keys(new_address)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+
+    def modify_first_contact_home_number(self, new_home_number):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("home").click()
+        wd.find_element_by_name("home").clear()
+        wd.find_element_by_name("home").send_keys(new_home_number)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_mobile_number(self, new_mobile_number):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(new_mobile_number)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_work_number(self, new_work_number):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("work").click()
+        wd.find_element_by_name("work").clear()
+        wd.find_element_by_name("work").send_keys(new_work_number)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_fax(self, new_fax):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("fax").click()
+        wd.find_element_by_name("fax").clear()
+        wd.find_element_by_name("fax").send_keys(new_fax)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
