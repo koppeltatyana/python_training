@@ -8,6 +8,13 @@ def test_modify_first_contact(app):
     app.session.logout()
 
 
+def test_modify_first_contact_to_empty(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact(Contact(first_name='', middle_name='', last_name='', nickname='', photo='', title='', company='', address='', home_number='', mobile_number='', work_number='', fax='', email='', email2='', email3='', homepage='', bday='-', bmonth='-', byear='', aday='-', amonth='-', ayear='', address2='', phone2='', notes=''))
+    app.session.logout()
+
+
 def test_modify_first_contact_firstname(app):
     app.session.login(username="admin", password="secret")
     # вместо передачи параметров передаем объект класса Group
