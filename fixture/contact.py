@@ -200,3 +200,44 @@ class ContactHelper:
         wd.find_element_by_name("fax").send_keys(new_fax)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+
+    def modify_first_contact_email(self, new_email):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("email").click()
+        wd.find_element_by_name("email").clear()
+        wd.find_element_by_name("email").send_keys(new_email)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_email2(self, new_email2):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("email2").click()
+        wd.find_element_by_name("email2").clear()
+        wd.find_element_by_name("email2").send_keys(new_email2)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_email3(self, new_email3):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("email3").click()
+        wd.find_element_by_name("email3").clear()
+        wd.find_element_by_name("email3").send_keys(new_email3)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+
+    def modify_first_contact_homepage(self, new_homepage):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("homepage").click()
+        wd.find_element_by_name("homepage").clear()
+        wd.find_element_by_name("homepage").send_keys(new_homepage)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()

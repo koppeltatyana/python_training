@@ -73,3 +73,31 @@ def test_modify_first_contact_fax(app):
     # вместо передачи параметров передаем объект класса Group
     app.contact.modify_first_contact_fax(new_fax='444555666777')
     app.session.logout()
+
+
+def test_modify_first_contact_email(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_email(new_email='qwe@qwe.qwe')
+    app.session.logout()
+
+
+def test_modify_first_contact_email2(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_email2(new_email2='asd@asd.asd')
+    app.session.logout()
+
+
+def test_modify_first_contact_email3(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_email3(new_email3='zxc@zxc.zxc')
+    app.session.logout()
+
+
+def test_modify_first_contact_homepage(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_homepage(new_homepage='New homepage')
+    app.session.logout()
