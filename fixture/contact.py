@@ -91,7 +91,7 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.app.return_to_home_page()
 
-    def modify_contact_firstname(self, new_firstname):
+    def modify_first_contact_firstname(self, new_firstname):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
@@ -101,7 +101,7 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
 
-    def modify_contact_middlename(self, new_middlename):
+    def modify_first_contact_middlename(self, new_middlename):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
@@ -111,7 +111,7 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
 
-    def modify_contact_lastname(self, new_lastname):
+    def modify_first_contact_lastname(self, new_lastname):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
@@ -121,12 +121,42 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
 
-    def modify_contact_nickname(self, new_nickname):
+    def modify_first_contact_nickname(self, new_nickname):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(new_nickname)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_title(self, new_title):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("title").click()
+        wd.find_element_by_name("title").clear()
+        wd.find_element_by_name("title").send_keys(new_title)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_company(self, new_company):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("company").click()
+        wd.find_element_by_name("company").clear()
+        wd.find_element_by_name("company").send_keys(new_company)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+
+    def modify_first_contact_address(self, new_address):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("address").click()
+        wd.find_element_by_name("address").clear()
+        wd.find_element_by_name("address").send_keys(new_address)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
