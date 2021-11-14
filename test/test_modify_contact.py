@@ -101,3 +101,38 @@ def test_modify_first_contact_homepage(app):
     # вместо передачи параметров передаем объект класса Group
     app.contact.modify_first_contact_homepage(new_homepage='New homepage')
     app.session.logout()
+
+
+def test_modify_first_contact_bday(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_bday(new_bday='20', new_bmonth='December', new_byear='1995')
+    app.session.logout()
+
+
+def test_modify_first_contact_aday(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_aday(new_aday='20', new_amonth='December', new_ayear='2025')
+    app.session.logout()
+
+
+def test_modify_first_contact_address2(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_address2(new_address2='New address2')
+    app.session.logout()
+
+
+def test_modify_first_contact_phone2(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_phone2(new_phone2='New phone2')
+    app.session.logout()
+
+
+def test_modify_first_contact_notes(app):
+    app.session.login(username="admin", password="secret")
+    # вместо передачи параметров передаем объект класса Group
+    app.contact.modify_first_contact_notes(new_notes='New notes')
+    app.session.logout()
