@@ -90,3 +90,13 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
         self.app.return_to_home_page()
+
+    def modify_contact_firstname(self, new_firstname):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(new_firstname)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
