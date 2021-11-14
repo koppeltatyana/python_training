@@ -40,7 +40,7 @@ class GroupHelper:
         self.return_to_groups_page()
         self.app.return_to_home_page()
 
-    def modify_group_name(self, new_name):
+    def modify_first_group_name(self, new_name):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.open_groups_page()
         wd.find_element_by_name("selected[]").click()
@@ -52,7 +52,7 @@ class GroupHelper:
         self.return_to_groups_page()
         self.app.return_to_home_page()
 
-    def modify_group_header(self, new_header):
+    def modify_first_group_header(self, new_header):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.open_groups_page()
         wd.find_element_by_name("selected[]").click()
@@ -64,7 +64,7 @@ class GroupHelper:
         self.return_to_groups_page()
         self.app.return_to_home_page()
 
-    def modify_group_footer(self, new_footer):
+    def modify_first_group_footer(self, new_footer):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.open_groups_page()
         wd.find_element_by_name("selected[]").click()
