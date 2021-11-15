@@ -38,28 +38,28 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
-    def modify_first_group(self, new_group_name='', new_group_header='', new_group_footer=''):
+    def modify_first_group(self, new_group_name=None, new_group_header=None, new_group_footer=None):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.open_groups_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_name("edit").click()
-        # fill groups form
-        if new_group_name != '':
+
+        # если новое значение параметра != значению по умолчанию, то записываем новое значение
+        if new_group_name is not None:
             wd.find_element_by_name("group_name").click()
             wd.find_element_by_name("group_name").clear()
             wd.find_element_by_name("group_name").send_keys(new_group_name)
 
-        if new_group_header != '':
+        if new_group_header is not None:
             wd.find_element_by_name("group_header").click()
             wd.find_element_by_name("group_header").clear()
             wd.find_element_by_name("group_header").send_keys(new_group_header)
 
-        if new_group_footer != '':
+        if new_group_footer is not None:
             wd.find_element_by_name("group_footer").click()
             wd.find_element_by_name("group_footer").clear()
             wd.find_element_by_name("group_footer").send_keys(new_group_footer)
 
-        # wd.find_element_by_id("content").click()
         # submit group updating
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
