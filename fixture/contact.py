@@ -96,7 +96,6 @@ class ContactHelper:
         wd = self.app.wd
         self.app.return_to_home_page()
         # init contact creation
-        wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # fill contacts form
         wd.find_element_by_name("firstname").click()
