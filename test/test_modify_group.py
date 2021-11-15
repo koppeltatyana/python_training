@@ -6,10 +6,3 @@ def test_modify_first_group(app):
     # вместо передачи параметров передаем объект класса Group
     app.group.modify_first_group(Group(name="New Name", header="New Header", footer="New Footer"))
     app.session.logout()
-
-
-def test_modify_first_group_to_empty(app):
-    app.session.login(username="admin", password="secret")
-    # вместо передачи параметров передаем объект класса Group
-    app.group.modify_first_group(Group(name="", header="", footer=""))
-    app.session.logout()
