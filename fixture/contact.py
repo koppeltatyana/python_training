@@ -1,6 +1,4 @@
 from selenium.webdriver.support.select import Select
-from model.contact import Contact
-import time
 
 
 class ContactHelper:
