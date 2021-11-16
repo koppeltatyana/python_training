@@ -11,76 +11,77 @@ class ContactHelper:
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         # fill contacts form
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middlename)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.lastname)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        wd.find_element_by_name("title").click()
-        wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys(contact.title)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.company)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(contact.address)
-        wd.find_element_by_name("home").click()
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(contact.home_number)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(contact.mobile_number)
-        wd.find_element_by_name("work").click()
-        wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(contact.work_number)
-        wd.find_element_by_name("fax").click()
-        wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys(contact.fax)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.email)
-        wd.find_element_by_name("email2").clear()
-        wd.find_element_by_name("email2").send_keys(contact.email2)
-        wd.find_element_by_name("email3").clear()
-        wd.find_element_by_name("email3").send_keys(contact.email3)
-        wd.find_element_by_name("homepage").click()
-        wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys(contact.homepage)
-        # entering bday from picklist
-        wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.byear)
-        # entering anniversary day from picklist
-        wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
-        wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys(contact.ayear)
-        # entering secondary block
-        wd.find_element_by_name("address2").click()
-        wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys(contact.address2)
-        wd.find_element_by_name("phone2").click()
-        wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys(contact.phone2)
-        wd.find_element_by_name("notes").click()
-        wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(contact.notes)
+        self.enter_values(contact)
+        # wd.find_element_by_name("firstname").click()
+        # wd.find_element_by_name("firstname").clear()
+        # wd.find_element_by_name("firstname").send_keys(contact.firstname)
+        # wd.find_element_by_name("middlename").click()
+        # wd.find_element_by_name("middlename").clear()
+        # wd.find_element_by_name("middlename").send_keys(contact.middlename)
+        # wd.find_element_by_name("lastname").click()
+        # wd.find_element_by_name("lastname").clear()
+        # wd.find_element_by_name("lastname").send_keys(contact.lastname)
+        # wd.find_element_by_name("nickname").click()
+        # wd.find_element_by_name("nickname").clear()
+        # wd.find_element_by_name("nickname").send_keys(contact.nickname)
+        # wd.find_element_by_name("title").click()
+        # wd.find_element_by_name("title").clear()
+        # wd.find_element_by_name("title").send_keys(contact.title)
+        # wd.find_element_by_name("company").click()
+        # wd.find_element_by_name("company").click()
+        # wd.find_element_by_name("company").clear()
+        # wd.find_element_by_name("company").send_keys(contact.company)
+        # wd.find_element_by_name("address").click()
+        # wd.find_element_by_name("address").clear()
+        # wd.find_element_by_name("address").send_keys(contact.address)
+        # wd.find_element_by_name("home").click()
+        # wd.find_element_by_name("home").clear()
+        # wd.find_element_by_name("home").send_keys(contact.home_number)
+        # wd.find_element_by_name("mobile").click()
+        # wd.find_element_by_name("mobile").clear()
+        # wd.find_element_by_name("mobile").send_keys(contact.mobile_number)
+        # wd.find_element_by_name("work").click()
+        # wd.find_element_by_name("work").clear()
+        # wd.find_element_by_name("work").send_keys(contact.work_number)
+        # wd.find_element_by_name("fax").click()
+        # wd.find_element_by_name("fax").clear()
+        # wd.find_element_by_name("fax").send_keys(contact.fax)
+        # wd.find_element_by_name("email").click()
+        # wd.find_element_by_name("email").clear()
+        # wd.find_element_by_name("email").send_keys(contact.email)
+        # wd.find_element_by_name("email2").clear()
+        # wd.find_element_by_name("email2").send_keys(contact.email2)
+        # wd.find_element_by_name("email3").clear()
+        # wd.find_element_by_name("email3").send_keys(contact.email3)
+        # wd.find_element_by_name("homepage").click()
+        # wd.find_element_by_name("homepage").clear()
+        # wd.find_element_by_name("homepage").send_keys(contact.homepage)
+        # # entering bday from picklist
+        # wd.find_element_by_name("bday").click()
+        # Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
+        # wd.find_element_by_name("bmonth").click()
+        # Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
+        # wd.find_element_by_name("byear").click()
+        # wd.find_element_by_name("byear").clear()
+        # wd.find_element_by_name("byear").send_keys(contact.byear)
+        # # entering anniversary day from picklist
+        # wd.find_element_by_name("aday").click()
+        # Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+        # wd.find_element_by_name("amonth").click()
+        # Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
+        # wd.find_element_by_name("ayear").click()
+        # wd.find_element_by_name("ayear").clear()
+        # wd.find_element_by_name("ayear").send_keys(contact.ayear)
+        # # entering secondary block
+        # wd.find_element_by_name("address2").click()
+        # wd.find_element_by_name("address2").clear()
+        # wd.find_element_by_name("address2").send_keys(contact.address2)
+        # wd.find_element_by_name("phone2").click()
+        # wd.find_element_by_name("phone2").clear()
+        # wd.find_element_by_name("phone2").send_keys(contact.phone2)
+        # wd.find_element_by_name("notes").click()
+        # wd.find_element_by_name("notes").clear()
+        # wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_xpath("//input[21]").click()
         self.app.return_to_home_page()
 
@@ -92,134 +93,134 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.app.return_to_home_page()
 
-    def modify_first_contact(self, new_firstname=None, new_middlename=None, new_lastname=None, new_nickname=None, new_photo=None, new_title=None,
-                             new_company=None, new_address=None, new_home_number=None, new_mobile_number=None,
-                             new_work_number=None, new_fax=None, new_email=None, new_email2=None, new_email3=None,
-                             new_homepage=None, new_bday=None, new_bmonth=None, new_byear=None, new_aday=None, new_amonth=None,
-                             new_ayear=None, new_address2=None, new_phone2=None, new_notes=None):
+    def modify_first_contact(self, new_contact):
         wd = self.app.wd
         self.app.return_to_home_page()
         # init contact editing
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
-
-        # если пришло значение != значению по умолчанию, то меняем значение на новое
-        if new_firstname is not None:
-            wd.find_element_by_name("firstname").click()
-            wd.find_element_by_name("firstname").clear()
-            wd.find_element_by_name("firstname").send_keys(new_firstname)
-
-        if new_middlename is not None:
-            wd.find_element_by_name("middlename").click()
-            wd.find_element_by_name("middlename").clear()
-            wd.find_element_by_name("middlename").send_keys(new_middlename)
-
-        if new_lastname is not None:
-            wd.find_element_by_name("lastname").click()
-            wd.find_element_by_name("lastname").clear()
-            wd.find_element_by_name("lastname").send_keys(new_lastname)
-
-        if new_nickname is not None:
-            wd.find_element_by_name("nickname").click()
-            wd.find_element_by_name("nickname").clear()
-            wd.find_element_by_name("nickname").send_keys(new_nickname)
-
-        if new_title is not None:
-            wd.find_element_by_name("title").click()
-            wd.find_element_by_name("title").clear()
-            wd.find_element_by_name("title").send_keys(new_title)
-
-        if new_company is not None:
-            wd.find_element_by_name("company").click()
-            wd.find_element_by_name("company").clear()
-            wd.find_element_by_name("company").send_keys(new_company)
-
-        if new_address is not None:
-            wd.find_element_by_name("address").click()
-            wd.find_element_by_name("address").clear()
-            wd.find_element_by_name("address").send_keys(new_address)
-
-        if new_home_number is not None:
-            wd.find_element_by_name("home").click()
-            wd.find_element_by_name("home").clear()
-            wd.find_element_by_name("home").send_keys(new_home_number)
-
-        if new_mobile_number is not None:
-            wd.find_element_by_name("mobile").click()
-            wd.find_element_by_name("mobile").clear()
-            wd.find_element_by_name("mobile").send_keys(new_mobile_number)
-
-        if new_work_number is not None:
-            wd.find_element_by_name("work").click()
-            wd.find_element_by_name("work").clear()
-            wd.find_element_by_name("work").send_keys(new_work_number)
-
-        if new_fax is not None:
-            wd.find_element_by_name("fax").click()
-            wd.find_element_by_name("fax").clear()
-            wd.find_element_by_name("fax").send_keys(new_fax)
-
-        if new_email is not None:
-            wd.find_element_by_name("email").click()
-            wd.find_element_by_name("email").clear()
-            wd.find_element_by_name("email").send_keys(new_email)
-
-        if new_email2 is not None:
-            wd.find_element_by_name("email2").click()
-            wd.find_element_by_name("email2").clear()
-            wd.find_element_by_name("email2").send_keys(new_email2)
-
-        if new_email3 is not None:
-            wd.find_element_by_name("email3").click()
-            wd.find_element_by_name("email3").clear()
-            wd.find_element_by_name("email3").send_keys(new_email3)
-
-        if new_homepage is not None:
-            wd.find_element_by_name("homepage").click()
-            wd.find_element_by_name("homepage").clear()
-            wd.find_element_by_name("homepage").send_keys(new_homepage)
-
-        # # entering bday from picklist
-        if new_bday is not None:
-            wd.find_element_by_name("bday").click()
-            Select(wd.find_element_by_name("bday")).select_by_visible_text(new_bday)
-
-        if new_bmonth is not None:
-            wd.find_element_by_name("bmonth").click()
-            Select(wd.find_element_by_name("bmonth")).select_by_visible_text(new_bmonth)
-
-        if new_byear is not None:
-            wd.find_element_by_name("byear").click()
-            wd.find_element_by_name("byear").clear()
-            wd.find_element_by_name("byear").send_keys(new_byear)
-
-        # entering anniversary day from picklist
-        if new_aday is not None:
-            wd.find_element_by_name("aday").click()
-            Select(wd.find_element_by_name("aday")).select_by_visible_text(new_aday)
-
-        if new_amonth is not None:
-            wd.find_element_by_name("amonth").click()
-            Select(wd.find_element_by_name("amonth")).select_by_visible_text(new_amonth)
-
-        if new_ayear is not None:
-            wd.find_element_by_name("ayear").click()
-            wd.find_element_by_name("ayear").clear()
-            wd.find_element_by_name("ayear").send_keys(new_ayear)
-
-        # entering secondary block
-        if new_address2 is not None:
-            wd.find_element_by_name("address2").click()
-            wd.find_element_by_name("address2").clear()
-            wd.find_element_by_name("address2").send_keys(new_address2)
-
-        if new_phone2 is not None:
-            wd.find_element_by_name("phone2").click()
-            wd.find_element_by_name("phone2").clear()
-            wd.find_element_by_name("phone2").send_keys(new_phone2)
-
-        if new_notes is not None:
-            wd.find_element_by_name("notes").click()
-            wd.find_element_by_name("notes").clear()
-            wd.find_element_by_name("notes").send_keys(new_notes)
+        self.enter_values(new_contact)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+
+    #  функция заполнения полей
+    def enter_values(self, contact):
+        wd = self.app.wd
+        # если пришло значение != значению по умолчанию, то меняем значение на новое
+        if contact.firstname is not None:
+            wd.find_element_by_name("firstname").click()
+            wd.find_element_by_name("firstname").clear()
+            wd.find_element_by_name("firstname").send_keys(contact.firstname)
+
+        if contact.middlename is not None:
+            wd.find_element_by_name("middlename").click()
+            wd.find_element_by_name("middlename").clear()
+            wd.find_element_by_name("middlename").send_keys(contact.middlename)
+
+        if contact.lastname is not None:
+            wd.find_element_by_name("lastname").click()
+            wd.find_element_by_name("lastname").clear()
+            wd.find_element_by_name("lastname").send_keys(contact.lastname)
+
+        if contact.nickname is not None:
+            wd.find_element_by_name("nickname").click()
+            wd.find_element_by_name("nickname").clear()
+            wd.find_element_by_name("nickname").send_keys(contact.nickname)
+
+        if contact.title is not None:
+            wd.find_element_by_name("title").click()
+            wd.find_element_by_name("title").clear()
+            wd.find_element_by_name("title").send_keys(contact.title)
+
+        if contact.company is not None:
+            wd.find_element_by_name("company").click()
+            wd.find_element_by_name("company").clear()
+            wd.find_element_by_name("company").send_keys(contact.company)
+
+        if contact.address is not None:
+            wd.find_element_by_name("address").click()
+            wd.find_element_by_name("address").clear()
+            wd.find_element_by_name("address").send_keys(contact.address)
+
+        if contact.home_number is not None:
+            wd.find_element_by_name("home").click()
+            wd.find_element_by_name("home").clear()
+            wd.find_element_by_name("home").send_keys(contact.home_number)
+
+        if contact.mobile_number is not None:
+            wd.find_element_by_name("mobile").click()
+            wd.find_element_by_name("mobile").clear()
+            wd.find_element_by_name("mobile").send_keys(contact.mobile_number)
+
+        if contact.work_number is not None:
+            wd.find_element_by_name("work").click()
+            wd.find_element_by_name("work").clear()
+            wd.find_element_by_name("work").send_keys(contact.work_number)
+
+        if contact.fax is not None:
+            wd.find_element_by_name("fax").click()
+            wd.find_element_by_name("fax").clear()
+            wd.find_element_by_name("fax").send_keys(contact.fax)
+
+        if contact.email is not None:
+            wd.find_element_by_name("email").click()
+            wd.find_element_by_name("email").clear()
+            wd.find_element_by_name("email").send_keys(contact.email)
+
+        if contact.email2 is not None:
+            wd.find_element_by_name("email2").click()
+            wd.find_element_by_name("email2").clear()
+            wd.find_element_by_name("email2").send_keys(contact.email2)
+
+        if contact.email3 is not None:
+            wd.find_element_by_name("email3").click()
+            wd.find_element_by_name("email3").clear()
+            wd.find_element_by_name("email3").send_keys(contact.email3)
+
+        if contact.homepage is not None:
+            wd.find_element_by_name("homepage").click()
+            wd.find_element_by_name("homepage").clear()
+            wd.find_element_by_name("homepage").send_keys(contact.homepage)
+
+        # # entering bday from picklist
+        if contact.bday is not None:
+            wd.find_element_by_name("bday").click()
+            Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
+
+        if contact.bmonth is not None:
+            wd.find_element_by_name("bmonth").click()
+            Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
+
+        if contact.byear is not None:
+            wd.find_element_by_name("byear").click()
+            wd.find_element_by_name("byear").clear()
+            wd.find_element_by_name("byear").send_keys(contact.byear)
+
+        # entering anniversary day from picklist
+        if contact.aday is not None:
+            wd.find_element_by_name("aday").click()
+            Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+
+        if contact.amonth is not None:
+            wd.find_element_by_name("amonth").click()
+            Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
+
+        if contact.ayear is not None:
+            wd.find_element_by_name("ayear").click()
+            wd.find_element_by_name("ayear").clear()
+            wd.find_element_by_name("ayear").send_keys(contact.ayear)
+
+        # entering secondary block
+        if contact.address2 is not None:
+            wd.find_element_by_name("address2").click()
+            wd.find_element_by_name("address2").clear()
+            wd.find_element_by_name("address2").send_keys(contact.address2)
+
+        if contact.phone2 is not None:
+            wd.find_element_by_name("phone2").click()
+            wd.find_element_by_name("phone2").clear()
+            wd.find_element_by_name("phone2").send_keys(contact.phone2)
+
+        if contact.notes is not None:
+            wd.find_element_by_name("notes").click()
+            wd.find_element_by_name("notes").clear()
+            wd.find_element_by_name("notes").send_keys(contact.notes)
