@@ -27,22 +27,24 @@ class GroupHelper:
     def delete_first_group(self):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.open_groups_page()
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
     def modify_first_group(self, new_group):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.open_groups_page()
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         wd.find_element_by_name("edit").click()
-
         # entering group's form with new data
         self.enter_group_values(new_group)
-
         # submit group updating
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+
+    def select_first_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
 
     def enter_group_values(self, group):
         wd = self.app.wd
