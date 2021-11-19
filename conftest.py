@@ -6,5 +6,10 @@ from fixture.application import Application
 def app(request):  # функция, инициализирующая фикстуру
     fixture = Application()  # создание фикстуры
     fixture.session.login(username='admin', password='secret')
-    request.addfinalizer(fixture.destroy)  # метод, который показывает, как фикстура должна быть разрушена
+
+    # метод, который делает разлогин и разрушает фикстуру после тестов
+    def fin():
+        fixture.session.logout()
+        fixture.destroy()
+    request.addfinalizer(fin)
     return fixture
