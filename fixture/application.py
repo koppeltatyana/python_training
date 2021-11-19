@@ -13,6 +13,13 @@ class Application:
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
 
+    def is_valid(self):
+        try:
+            self.wd.current_url
+            return True
+        except:
+            return False
+
     def open_home_page(self):
         wd = self.wd  # получаем ссылку на драйвер из текущего объекта
         wd.get("http://localhost/addressbook/")
