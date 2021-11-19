@@ -48,18 +48,14 @@ class GroupHelper:
 
     def enter_group_values(self, group):
         wd = self.app.wd
+        self.change_field_value("group_name", group.group_name)
+        self.change_field_value("group_header", group.group_header)
+        self.change_field_value("group_footer", group.group_footer)
+
+    def change_field_value(self, field_name, new_value):
+        wd = self.app.wd
         # если новое значение параметра != значению по умолчанию, то записываем новое значение
-        if group.group_name is not None:
-            wd.find_element_by_name("group_name").click()
-            wd.find_element_by_name("group_name").clear()
-            wd.find_element_by_name("group_name").send_keys(group.group_name)
-
-        if group.group_header is not None:
-            wd.find_element_by_name("group_header").click()
-            wd.find_element_by_name("group_header").clear()
-            wd.find_element_by_name("group_header").send_keys(group.group_header)
-
-        if group.group_footer is not None:
-            wd.find_element_by_name("group_footer").click()
-            wd.find_element_by_name("group_footer").clear()
-            wd.find_element_by_name("group_footer").send_keys(group.group_footer)
+        if new_value is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(new_value)
