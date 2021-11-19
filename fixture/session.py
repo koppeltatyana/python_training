@@ -16,3 +16,23 @@ class SessionHelper:
     def logout(self):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         wd.find_element_by_link_text("Logout").click()
+
+    def ensure_logout(self):
+        if self.is_logged_in():
+            self.logout()
+
+    def ensure_login(self, username, password):
+        if self.is_logged_in():
+            if self.is_logged_in_as_username(username):
+                return
+            else:
+                self.logout()
+        self.login(username, password)
+
+    def is_logged_in(self):
+        wd = self.app.wd
+        return len(wd.find_elements_by_link_text("Logout")) > 0
+
+    def is_logged_in_as_username(self, username):
+        wd = self.app.wd
+        return wd.find_element_by_xpath("//div[@id='top']/form/b").text == "(" + username + ")"
