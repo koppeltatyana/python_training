@@ -46,7 +46,6 @@ class GroupHelper:
         wd.find_element_by_name("selected[]").click()
 
     def enter_group_values(self, group):
-        wd = self.app.wd
         self.change_field_value("group_name", group.group_name)
         self.change_field_value("group_header", group.group_header)
         self.change_field_value("group_footer", group.group_footer)
@@ -59,7 +58,7 @@ class GroupHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(new_value)
 
-    def count(self):
+    def count_groups(self):
         wd = self.app.wd
         self.open_groups_page()
         return len(wd.find_elements_by_name("selected[]"))
