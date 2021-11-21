@@ -6,7 +6,7 @@ class SessionHelper:
     def login(self, username, password):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
         self.app.open_home_page()
-        wd.implicitly_wait(10)
+        wd.implicitly_wait(2)
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
