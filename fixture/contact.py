@@ -10,10 +10,8 @@ class ContactHelper:
         wd = self.app.wd
         # init contact creation
         wd.find_element_by_link_text("add new").click()
-
         # entering contact's form
         self.enter_values(contact)
-
         # click to the button "Enter"
         wd.find_element_by_xpath("//input[21]").click()
         self.app.return_to_home_page()
@@ -25,7 +23,6 @@ class ContactHelper:
         wd.find_element_by_name("selected[]").click()
         # click to the button "Delete"
         wd.find_element_by_xpath("//input[@value='Delete']").click()
-
         # accepting with alert on the window
         wd.switch_to.alert.accept()
         self.app.return_to_home_page()
@@ -85,7 +82,7 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(new_value)
 
-    def count(self):
+    def count_contacts(self):
         wd = self.app.wd
         self.app.return_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
