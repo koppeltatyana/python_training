@@ -5,7 +5,7 @@ fixture = None
 
 
 @pytest.fixture
-def app(request):  # функция, инициализирующая фикстуру
+def app():  # функция, инициализирующая фикстуру
     global fixture
 
     if fixture is None:
