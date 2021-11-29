@@ -1,13 +1,22 @@
+from sys import maxsize
+
+
 class Group:
 
     def __init__(self, group_name=None, group_header=None, group_footer=None, group_id=None):
         self.group_name = group_name
         self.group_header = group_header
         self.group_footer = group_footer
-        self.group_id = group_id
+        self.id = group_id
 
     def __repr__(self):
-        return "{0}: {1}".format(self.group_id, self.group_name)
+        return "{0}: {1}".format(self.id, self.group_name)
 
     def __eq__(self, other):
-        return self.group_id == other.group_id and self.group_name == other.group_name
+        return (self.id is None or other.id is None or self.id == other.id) and self.group_name == other.group_name
+
+    def id_or_max(self):  # функция для определения, есть ли у группы идентификатор
+        if self.id:
+            return int(self.id)
+        else:
+            return maxsize
