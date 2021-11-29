@@ -5,3 +5,9 @@ class Group:
         self.group_header = group_header
         self.group_footer = group_footer
         self.group_id = group_id
+
+    def __repr__(self):
+        return "{0}: {1}".format(self.group_id, self.group_name)
+
+    def __eq__(self, other):
+        return self.group_id == other.group_id and self.group_name == other.group_name
