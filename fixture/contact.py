@@ -1,6 +1,7 @@
 from selenium.webdriver.support.select import Select
 from model.contact import Contact
 
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -15,6 +16,7 @@ class ContactHelper:
         # click to the button "Enter"
         wd.find_element_by_xpath("//input[21]").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -27,6 +29,7 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         wd.find_element_by_css_selector("div.msgbox")
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def modify_first_contact(self, new_contact):
         wd = self.app.wd
@@ -36,6 +39,7 @@ class ContactHelper:
         self.enter_values(new_contact)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     #  функция заполнения полей
     def enter_values(self, contact):
@@ -88,13 +92,16 @@ class ContactHelper:
         self.app.return_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.app.return_to_home_page()
-        contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            contact_lastname = element.find_element_by_css_selector("tr > td:nth-child(2)").text
-            contact_firstname = element.find_element_by_css_selector("tr > td:nth-child(3)").text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts += [Contact(contact_id=id, lastname=contact_lastname, firstname=contact_firstname)]
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.return_to_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                contact_lastname = element.find_element_by_css_selector("tr > td:nth-child(2)").text
+                contact_firstname = element.find_element_by_css_selector("tr > td:nth-child(3)").text
+                contact_id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache += [Contact(contact_id=contact_id, lastname=contact_lastname, firstname=contact_firstname)]
+        return list(self.contact_cache)  # возвращаем копию этого списка в случае поломки данных
