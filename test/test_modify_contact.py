@@ -8,7 +8,7 @@ def test_modify_first_contact(app):
         app.contact.create(Contact(firstname="John"))
 
     old_contacts = app.contact.get_contact_list()
-    index = randrange(len(old_contacts))  # случайным образом выбираем индекс удаляемой группы
+    index = randrange(len(old_contacts))  # случайным образом выбираем индекс удаляемого контакта
     contact = Contact(firstname='New First Name', lastname='New Last Name',
                       bday='13', aday='13', address='New Address')
     contact.id = old_contacts[index].id

@@ -4,16 +4,10 @@ from model.contact import Contact
 
 def test_add_contact(app):
     old_contacts = app.contact.get_contact_list()
-    contact = Contact(firstname='Томас', middlename='Джеффри', lastname='Хэнкс',
-                      nickname='Том', photo='', title='Номер Томми',
-                      company='Голливуд', address='Лос-Анжелес',
-                      home_number='111222333', mobile_number='+1465789159',
-                      work_number='789456123', fax='546546546', email='thomas.hanks@gmail.com',
-                      email2='tommi.king@gmail.com', email3='tfhanks@yahoo.com',
-                      homepage='https://en.wikipedia.org/wiki/Tom_Hanks',
-                      bday='10', bmonth='October', byear='1965',
-                      aday='10', amonth='October', ayear='2025',
-                      address2='Пляжная ул.', phone2='789456123', notes='Qweashgdfaghcxhgzctafsd')
+    contact = Contact(firstname='Томас', middlename='Джеффри', lastname='Хэнкс', nickname='Том', photo='', title='Номер Томми',
+                      company='Голливуд', address='Лос-Анжелес', home_number='111222333', mobile_number='+1465789159', work_number='789456123', fax='546546546',
+                      email='thomas.hanks@gmail.com', email2='tommi.king@gmail.com', email3='tfhanks@yahoo.com', homepage='https://en.wikipedia.org/wiki/Tom_Hanks',
+                      bday='10', bmonth='October', byear='1965', aday='10', amonth='October', ayear='2025', address2='Пляжная ул.', phone2='789456123', notes='Qweashgdfaghcxhgzctafsd')
     app.contact.create(contact)
     assert len(old_contacts) + 1 == app.contact.count_contacts()  # функция count_groups используется как хэш
     new_contacts = app.contact.get_contact_list()
