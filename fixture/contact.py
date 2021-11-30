@@ -19,10 +19,13 @@ class ContactHelper:
         self.contact_cache = None
 
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.app.return_to_home_page()
         # selecting first contact
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
         # click to the button "Delete"
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # accepting with alert on the window
@@ -31,15 +34,22 @@ class ContactHelper:
         self.app.return_to_home_page()
         self.contact_cache = None
 
-    def modify_first_contact(self, new_contact):
+    def modify_first_contact(self):
+        self.modify_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, new_contact):
         wd = self.app.wd
         self.app.return_to_home_page()
         # init contact editing
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.select_contact_by_index_for_edit(index)
         self.enter_values(new_contact)
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
         self.contact_cache = None
+
+    def select_contact_by_index_for_edit(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_css_selector("tr > td:nth-child(8)")[index].click()
 
     #  функция заполнения полей
     def enter_values(self, contact):
