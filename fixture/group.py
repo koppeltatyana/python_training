@@ -1,5 +1,6 @@
 from model.group import Group
 
+
 class GroupHelper:
 
     def __init__(self, app):
@@ -25,6 +26,7 @@ class GroupHelper:
         # submit group creation
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def delete_first_group(self):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
@@ -32,6 +34,7 @@ class GroupHelper:
         self.select_first_group()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def modify_first_group(self, new_group):
         wd = self.app.wd  # получаем ссылку на драйвер из текущего объекта
@@ -43,6 +46,7 @@ class GroupHelper:
         # submit group updating
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def select_first_group(self):
         wd = self.app.wd
@@ -66,12 +70,15 @@ class GroupHelper:
         self.open_groups_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    group_cache = None
+
     def get_group_list(self):
-        wd = self.app.wd
-        self.open_groups_page()
-        groups = []
-        for element in wd.find_elements_by_css_selector("span.group"):
-            text = element.text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            groups += [Group(group_name=text, group_id=id)]
-        return groups
+        if self.group_cache is None:
+            wd = self.app.wd
+            self.open_groups_page()
+            self.group_cache = []
+            for element in wd.find_elements_by_css_selector("span.group"):
+                text = element.text
+                group_id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.group_cache += [Group(group_name=text, group_id=group_id)]
+        return list(self.group_cache)  # возвращаем копию этого списка в случае поломки данных
