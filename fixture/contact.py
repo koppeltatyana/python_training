@@ -132,25 +132,27 @@ class ContactHelper:
         self.open_contact_by_index_for_edit(index)
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        middlename = wd.find_element_by_name("middlename").get_attribute("value")
         contact_id = wd.find_element_by_name("id").get_attribute("value")
         home_number = wd.find_element_by_name("home").get_attribute("value")
         work_number = wd.find_element_by_name("work").get_attribute("value")
         mobile_number = wd.find_element_by_name("mobile").get_attribute("value")
         secondary_number = wd.find_element_by_name("phone2").get_attribute("value")
-        return Contact(contact_id=contact_id, firstname=firstname, lastname=lastname,
-                       home_number=home_number, work_number=work_number, mobile_number=mobile_number,
-                       phone2=secondary_number)
+        return Contact(contact_id=contact_id, firstname=firstname, middlename=middlename,
+                       lastname=lastname, home_number=home_number, work_number=work_number,
+                       mobile_number=mobile_number, phone2=secondary_number)
 
     def get_contact_info_from_view_page(self, index):
         wd = self.app.wd
         self.app.return_to_home_page()
         self.open_contact_by_index_for_view(index)
         text = wd.find_element_by_id("content").text
+        fullname = wd.find_element_by_xpath("//div[@id='content']/b").text
         home_number = self.contact_number_on_view_page('H', text)
         work_number = self.contact_number_on_view_page('W', text)
         mobile_number = self.contact_number_on_view_page('M', text)
         secondary_number = self.contact_number_on_view_page('P', text)
-        return Contact(home_number=home_number, work_number=work_number,
+        return Contact(fullname=fullname, home_number=home_number, work_number=work_number,
                        mobile_number=mobile_number, phone2=secondary_number)
 
     def contact_number_on_view_page(self, number_template, text):
