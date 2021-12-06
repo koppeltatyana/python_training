@@ -121,3 +121,17 @@ class ContactHelper:
                 contact_id = element.find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache += [Contact(contact_id=contact_id, lastname=contact_lastname, firstname=contact_firstname)]
         return list(self.contact_cache)  # возвращаем копию этого списка в случае поломки данных
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_contact_by_index_for_edit(index)
+        firstname = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        contact_id = wd.find_element_by_name("id").get_attribute("value")
+        home_number = wd.find_element_by_name("home").get_attribute("value")
+        work_number = wd.find_element_by_name("work").get_attribute("value")
+        mobile_number = wd.find_element_by_name("mobile").get_attribute("value")
+        secondary_number = wd.find_element_by_name("phone2").get_attribute("value")
+        return Contact(contact_id=contact_id, firstname=firstname, lastname=lastname,
+                       home_number=home_number, work_number=work_number, mobile_number=mobile_number,
+                       phone2=secondary_number)
