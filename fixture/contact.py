@@ -121,11 +121,9 @@ class ContactHelper:
                 contact_lastname = element.find_element_by_css_selector("tr > td:nth-child(2)").text
                 contact_firstname = element.find_element_by_css_selector("tr > td:nth-child(3)").text
                 contact_id = element.find_element_by_name("selected[]").get_attribute("value")
-                all_phones = element.find_element_by_css_selector("tr > td:nth-child(6)").text.split()
+                all_phones = element.find_element_by_css_selector("tr > td:nth-child(6)").text
                 self.contact_cache += [Contact(contact_id=contact_id, lastname=contact_lastname,
-                                               firstname=contact_firstname, home_number=all_phones[0],
-                                               mobile_number=all_phones[1], work_number=all_phones[2],
-                                               phone2=all_phones[3])]
+                                               firstname=contact_firstname, all_phones_from_home_page=all_phones)]
         return list(self.contact_cache)  # возвращаем копию этого списка в случае поломки данных
 
     def get_contact_info_from_edit_page(self, index):
@@ -148,9 +146,17 @@ class ContactHelper:
         self.app.return_to_home_page()
         self.open_contact_by_index_for_view(index)
         text = wd.find_element_by_id("content").text
-        home_number = re.search("H: (.*)", text).group(1)
-        work_number = re.search("W: (.*)", text).group(1)
-        mobile_number = re.search("M: (.*)", text).group(1)
-        secondary_number = re.search("P: (.*)", text).group(1)
+        home_number = self.contact_number_on_view_page('H', text)
+        work_number = self.contact_number_on_view_page('W', text)
+        mobile_number = self.contact_number_on_view_page('M', text)
+        secondary_number = self.contact_number_on_view_page('P', text)
         return Contact(home_number=home_number, work_number=work_number,
                        mobile_number=mobile_number, phone2=secondary_number)
+
+    def contact_number_on_view_page(self, number_template, text):
+        wd = self.app.wd
+        if re.search("{0}:(.*)".format(number_template), text) is not None:
+            number_from_view_page = re.search("{0}: (.*)".format(number_template), text).group(1)
+        else:
+            number_from_view_page = None
+        return number_from_view_page
