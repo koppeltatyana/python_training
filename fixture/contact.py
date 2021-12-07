@@ -158,8 +158,10 @@ class ContactHelper:
         work_number = self.contact_number_on_view_page('W', text)
         mobile_number = self.contact_number_on_view_page('M', text)
         secondary_number = self.contact_number_on_view_page('P', text)
+        full_emails = self.get_all_emails_on_view_page(text)
+        # print(full_emails)
         return Contact(fullname=fullname, home_number=home_number, work_number=work_number,
-                       mobile_number=mobile_number, phone2=secondary_number)
+                       mobile_number=mobile_number, phone2=secondary_number, all_emails_from_view_page=full_emails)
 
     def contact_number_on_view_page(self, number_template, text):
         wd = self.app.wd
@@ -168,3 +170,11 @@ class ContactHelper:
         else:
             number_from_view_page = None
         return number_from_view_page
+
+    def get_all_emails_on_view_page(self, text):
+        wd = self.app.wd
+        if re.findall("(.*@.+.[ru,com])", text) is not None:
+            emails_from_view_page = re.findall("(.+@.+.[ru,com])", text)  # .group(1)
+        else:
+            emails_from_view_page = None
+        return emails_from_view_page
