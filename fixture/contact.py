@@ -123,8 +123,9 @@ class ContactHelper:
                 contact_id = element.find_element_by_name("selected[]").get_attribute("value")
                 all_phones = element.find_element_by_css_selector("tr > td:nth-child(6)").text
                 all_emails = element.find_element_by_css_selector("tr > td:nth-child(5)").text
+                address = element.find_element_by_css_selector("tr > td:nth-child(4)").text
                 self.contact_cache += [Contact(contact_id=contact_id, lastname=contact_lastname,
-                                               firstname=contact_firstname, all_phones_from_home_page=all_phones,
+                                               firstname=contact_firstname, address=address, all_phones_from_home_page=all_phones,
                                                all_emails_from_home_page=all_emails)]
         return list(self.contact_cache)  # возвращаем копию этого списка в случае поломки данных
 
@@ -143,10 +144,12 @@ class ContactHelper:
         email = wd.find_element_by_name("email").get_attribute("value")
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
+        address2 = wd.find_element_by_name("address2").get_attribute("value")
         return Contact(contact_id=contact_id, firstname=firstname, middlename=middlename,
                        lastname=lastname, home_number=home_number, work_number=work_number,
                        mobile_number=mobile_number, phone2=secondary_number,
-                       email=email, email2=email2, email3=email3)
+                       email=email, email2=email2, email3=email3, address=address, address2=address2)
 
     def get_contact_info_from_view_page(self, index):
         wd = self.app.wd
@@ -159,7 +162,6 @@ class ContactHelper:
         mobile_number = self.contact_number_on_view_page('M', text)
         secondary_number = self.contact_number_on_view_page('P', text)
         full_emails = self.get_all_emails_on_view_page(text)
-        # print(full_emails)
         return Contact(fullname=fullname, home_number=home_number, work_number=work_number,
                        mobile_number=mobile_number, phone2=secondary_number, all_emails_from_view_page=full_emails)
 
