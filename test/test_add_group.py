@@ -14,12 +14,6 @@ test_data = [Group(group_name="", group_header="", group_footer="")] + [
         Group(group_name=random_string('name', 5), group_header=random_string('header', 10), group_footer=random_string('footer', 20))
         for i in range(8)
     ]
-# [
-#     Group(group_name=name, group_header=random_string('header', 10), group_footer=random_string('footer', 20))
-#     for name in ["", random_string('name', 5)]
-#     for header in ["", random_string('header', 15)]
-#     for footer in ["", random_string('footer', 25)]
-# ]
 
 
 @pytest.mark.parametrize("group", test_data, ids=[repr(gr) for gr in test_data])
