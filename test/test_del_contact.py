@@ -2,7 +2,7 @@ from model.contact import Contact
 from random import randrange
 
 
-def test_delete_first_contact(app):
+def test_delete_some_contact(app):
     # добавление проверки: если нет ни одного контакта, то перед удалением создаем
     if app.contact.count_contacts() == 0:
         app.contact.create(Contact(firstname="John"))
