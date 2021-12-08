@@ -5,11 +5,12 @@ fixture = None
 
 
 @pytest.fixture
-def app():  # функция, инициализирующая фикстуру
+def app(request):  # функция, инициализирующая фикстуру
     global fixture
 
     if fixture is None:
-        fixture = Application()  # создание фикстуры
+        browser = request.config.getoption("--browser")
+        fixture = Application(browser=browser)  # создание фикстуры
     else:
         if not fixture.is_valid():
             fixture = Application()  # создание фикстуры
@@ -24,3 +25,8 @@ def stop(request):
         fixture.session.ensure_logout()
         fixture.destroy()
     request.addfinalizer(fin)
+    return fixture
+
+
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="firefox")
