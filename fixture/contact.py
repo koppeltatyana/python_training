@@ -145,11 +145,10 @@ class ContactHelper:
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
         address = wd.find_element_by_name("address").get_attribute("value")
-        address2 = wd.find_element_by_name("address2").get_attribute("value")
         return Contact(contact_id=contact_id, firstname=firstname, middlename=middlename,
                        lastname=lastname, home_number=home_number, work_number=work_number,
                        mobile_number=mobile_number, phone2=secondary_number,
-                       email=email, email2=email2, email3=email3, address=address, address2=address2)
+                       email=email, email2=email2, email3=email3, address=address)
 
     def get_contact_info_from_view_page(self, index):
         wd = self.app.wd
