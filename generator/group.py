@@ -1,12 +1,13 @@
-import getopt
+import getopt  # чтение опций командной строки
+import sys  # для получения опций командной строки
 import random
 import string
-import sys
 from model.group import Group
 import os.path
 import json
 
 
+#  чтение опций командной строки (из оф страницы)
 try:
     opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of groups", "file"])
 except getopt.GetoptError as err:
@@ -17,10 +18,11 @@ except getopt.GetoptError as err:
 n = 5
 f = "data/groups.json"
 
+#  цикл для чтения опций (название опции, значение опции; хранятся в виде кортежей)
 for o, a in opts:
-    if o == "-n":
+    if o == "-n":  # опция == '-n' - кол-во групп
         n = int(a)
-    elif o == "-f":
+    elif o == "-f":  # опция == '-f' - файл, куда нужно писать данные
         f = a
 
 
