@@ -13,7 +13,7 @@ def random_string(prefix, maxlen):
 
 
 def random_number(maxlen):
-    symbols = '+' + string.digits + '-' * 5 + " " * 5
+    symbols = '+' + string.digits + '-' * 2 + " " * 5
     return "".join(random.choice(symbols) for i in range(random.randrange(maxlen)))
 
 
