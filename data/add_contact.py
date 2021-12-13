@@ -42,9 +42,9 @@ def random_day():
 
 
 test_data = [Contact(firstname='', middlename='', lastname='', nickname='', photo='', title='',
-                      company='', address='', home_number='', mobile_number='', work_number='',
-                      fax='', email='', email2='', email3='', homepage='', bday='', bmonth='-',
-                      byear='', aday='', amonth='-', ayear='', address2='', phone2='', notes='')] + \
+                     company='', address='', home_number='', mobile_number='', work_number='',
+                     fax='', email='', email2='', email3='', homepage='', bday='', bmonth='-',
+                     byear='', aday='', amonth='-', ayear='', address2='', phone2='', notes='')] + \
             [
                 Contact(firstname=random_string('f', 5), middlename=random_string('m', 5), lastname=random_string('l', 5),
                         nickname=random_string('n', 5), photo='', title=random_string('title', 10), company=random_string('comp', 5),
