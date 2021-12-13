@@ -4,7 +4,7 @@ import random
 import string
 from model.group import Group
 import os.path
-import json
+import jsonpickle
 
 
 #  чтение опций командной строки (из оф страницы)
@@ -42,7 +42,5 @@ test_data = [Group(group_name="", group_header="", group_footer="")] + [
 # к директории приклеиваем значение из ".." + f
 file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 with open(file, "w") as out:
-    #  json.dumps превращает некоторый тип данных в строку
-    #  __dict__ делает из json'а словарь (нужно, так как пакет json не знает как преобразовать объект типа Group в json)
-    #  поэтому нужно указать функцию default
-    out.write(json.dumps(test_data, default=lambda x: x.__dict__, indent=2))  # indent = 2 для красивого json'a
+    jsonpickle.set_encoder_options("json", indent=2)
+    out.write(jsonpickle.encode(test_data))  # ета штука нужна чтобы к сгенерированным данным еще и дописывать имя класса
