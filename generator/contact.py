@@ -17,9 +17,9 @@ def random_number(maxlen):
     return "".join(random.choice(symbols) for i in range(random.randrange(maxlen)))
 
 
-def random_email(posfix, maxlen):
-    symbols = string.ascii_letters + string.digits + "@" + "." * 2 + " " * 5
-    return "".join(random.choice(symbols) for i in range(random.randrange(maxlen))) + posfix
+def random_email(service, posfix, maxlen):
+    symbols = string.ascii_letters + string.digits
+    return "".join(random.choice(symbols) for i in range(random.randrange(maxlen))) + "@" + service + posfix
 
 
 def random_month():
@@ -59,7 +59,7 @@ test_data = [Contact(firstname='', middlename='', lastname='', nickname='', phot
                 Contact(firstname=random_string('f', 5), middlename=random_string('m', 5), lastname=random_string('l', 5),
                         nickname=random_string('n', 5), photo='', title=random_string('title', 10), company=random_string('comp', 5),
                         address=random_string('address', 25), home_number=random_number(10), mobile_number=random_number(10), work_number=random_number(10),
-                        fax=random_number(10), email=random_email(".com", 20), email2=random_email(".ru", 20), email3=random_email(".com", 20),
+                        fax=random_number(10), email=random_email("gmail", ".com", 20), email2=random_email("mail", ".ru", 20), email3=random_email("gmail", ".com", 20),
                         homepage=random_string("homepage", 5), bday=random_day(), bmonth=random_month(),
                         byear=random.randint(1900, 2050), aday=random_day(), amonth=random_month(), ayear=random.randint(1900, 2050),
                         address2=random_string("address2", 50), phone2=random_number(10), notes=random_string("address2", 150))
