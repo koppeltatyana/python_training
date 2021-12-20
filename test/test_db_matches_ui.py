@@ -17,5 +17,4 @@ def test_contact_list(app, db):
     def clean(contact):  # убираем наши лишние пробелы (только в нашем тесте)
         return Contact(contact_id=contact.id, firstname=contact.firstname.strip(), lastname=contact.lastname.strip())
     db_list = list(map(clean, db.get_contact_list()))
-    #  print(ui_list, db_list, sep="\n")
     assert sorted(ui_list, key=Contact.id_or_max) == sorted(db_list, key=Contact.id_or_max)
