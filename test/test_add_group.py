@@ -2,13 +2,12 @@
 from model.group import Group
 
 
-def test_add_group(app, json_groups):
+def test_add_group(app, db, json_groups):
     group = json_groups
-    old_groups = app.group.get_group_list()
+    old_groups = db.get_group_list()  # сделали чтобы список старых групп читался из БД, а не из ui
     # вместо передачи параметров передаем объект класса Group
     app.group.create(group)
-    assert len(old_groups) + 1 == app.group.count_groups()  # функция count_groups используется как хэш
-    new_groups = app.group.get_group_list()
+    new_groups = db.get_group_list()  # сделали чтобы список новых групп читался из БД, а не из ui
     old_groups += [group]
     # теперь сравниваем отсортированные списки групп
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
