@@ -32,6 +32,17 @@ def app(request):  # функция, инициализирующая фикст
     return fixture
 
 
+@pytest.fixture(scope='session')
+def db(request):
+    db_config = load_config(request.config.getoption("--target"))["db"]
+    db_fixture = DbFixture(host=db_config["host"], name=db_config["name"], user=db_config["user"], password=db_config["password"])
+
+    def fin():
+        db_fixture.destroy()
+    request.addfinalizer(fin)
+    return db_fixture
+
+
 @pytest.fixture(scope='session', autouse=True)
 def stop(request):
     def fin():
@@ -39,18 +50,6 @@ def stop(request):
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture
-
-
-@pytest.fixture(scope="session")
-def db(request):
-    db_config = load_config(request.config.getoption("--target"))["db"]
-    db_fixture = DbFixture(host=db_config["host"], name = db_config["name"],
-                           user=db_config["name"], password=db_config["password"])
-
-    def fin():
-        db_fixture.destroy()
-    request.addfinalizer(fin)
-    return db_fixture
 
 
 def pytest_addoption(parser):

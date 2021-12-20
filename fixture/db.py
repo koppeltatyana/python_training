@@ -19,7 +19,7 @@ class DbFixture:
             cursor.execute("select group_id, group_name, group_header, group_footer from group_list")
             for row in cursor:
                 (group_id, group_name, group_header, group_footer) = row
-                group_list += [Group(group_id=group_id, group_name=group_name, group_header=group_header, group_footer=group_footer)]
+                group_list += [Group(group_id=str(group_id), group_name=group_name, group_header=group_header, group_footer=group_footer)]
         finally:
             cursor.close()
         return group_list
