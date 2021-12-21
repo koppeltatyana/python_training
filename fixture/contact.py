@@ -135,8 +135,6 @@ class ContactHelper:
         wd.find_element_by_css_selector("input[value='{0}']".format(id))
         wd.find_element_by_css_selector("tr > td:nth-child(8)").click()
 
-        # wd.find_element_by_xpath("//input[value='{0}']/parent::td//following-sibling::td:nth-child(8)".format(id)).click()
-
     def open_contact_by_index_for_view(self, index):
         wd = self.app.wd
         # в таблице на главной странице нажимаем на иконку человечка в 7 столбце
