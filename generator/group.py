@@ -15,7 +15,7 @@ except getopt.GetoptError as err:
     sys.exit(2)
 
 
-n = 5
+n = 3
 f = "data/groups.json"
 
 #  цикл для чтения опций (название опции, значение опции; хранятся в виде кортежей)
