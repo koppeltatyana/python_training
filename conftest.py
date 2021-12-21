@@ -52,9 +52,15 @@ def stop(request):
     return fixture
 
 
+@pytest.fixture
+def check_ui(request):  # фикстура для возможности отключения проверки ui
+    return request.config.getoption("--check_ui")
+
+
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
     parser.addoption("--target", action="store", default="target.json")  # храним все остальные параметры в файле
+    parser.addoption("--check_ui", action="store_true")  # при action="store_true" значение check_ui будет true, если опция указана и false - если не указана
 
 
 def pytest_generate_tests(metafunc):  # функция для генерации тестов
