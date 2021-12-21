@@ -64,6 +64,16 @@ class ContactHelper:
         self.app.return_to_home_page()
         self.contact_cache = None
 
+    def modify_contact_by_id(self, id, new_contact):
+        wd = self.app.wd
+        self.app.return_to_home_page()
+        # init contact editing
+        self.open_contact_by_id_for_edit(id)
+        self.enter_values(new_contact)
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
+        self.contact_cache = None
+
     #  функция заполнения полей
     def enter_values(self, contact):
         self.change_field_value("firstname", contact.firstname)
@@ -119,6 +129,13 @@ class ContactHelper:
         wd = self.app.wd
         # в таблице на главной странице нажимаем на иконку карандаша в 8 столбце
         wd.find_elements_by_css_selector("tr > td:nth-child(8)")[index].click()
+
+    def open_contact_by_id_for_edit(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='{0}']".format(id))
+        wd.find_element_by_css_selector("tr > td:nth-child(8)").click()
+
+        # wd.find_element_by_xpath("//input[value='{0}']/parent::td//following-sibling::td:nth-child(8)".format(id)).click()
 
     def open_contact_by_index_for_view(self, index):
         wd = self.app.wd
