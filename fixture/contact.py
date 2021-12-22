@@ -132,8 +132,13 @@ class ContactHelper:
 
     def open_contact_by_id_for_edit(self, id):
         wd = self.app.wd
-        wd.find_element_by_css_selector("input[value='{0}']".format(id))
-        wd.find_element_by_css_selector("tr > td:nth-child(8)").click()
+        for element in wd.find_elements_by_name("entry"):
+            contact_id = element.find_element_by_name("selected[]").get_attribute("value")
+            if contact_id == id:
+                element.find_element_by_css_selector("td:nth-child(8)").click()
+                break
+        # wd.find_element_by_css_selector("input[value='{0}']".format(id))
+        # wd.find_element_by_css_selector("td:nth-child(8)").click()
 
     def open_contact_by_index_for_view(self, index):
         wd = self.app.wd
