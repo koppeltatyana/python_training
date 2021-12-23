@@ -39,7 +39,7 @@ except getopt.GetoptError as err:
     getopt.usage()
     sys.exit(2)
 
-n = 3
+n = 7
 f = "data/contacts.json"
 
 

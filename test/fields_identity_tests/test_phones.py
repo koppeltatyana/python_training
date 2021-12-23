@@ -17,7 +17,7 @@ def test_phones_on_contact_view_page(app):
 
 
 def clear_number(text):
-    return re.sub("[() -+]", "", text)
+    return re.sub("[() *+-]", "", text)
 
 
 def merge_phones_like_on_home_page(contact):
