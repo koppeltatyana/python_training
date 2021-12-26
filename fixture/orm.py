@@ -7,29 +7,28 @@ from pymysql.converters import decoders
 
 class ORMFixture:
 
-    db = Database()
+    db = Database()  # Объект, на основе которого будет строится привязка
 
     # привязка
     class ORMGroup(db.Entity):
-        _table_ = 'group_list'
-        id = PrimaryKey(int, column='group_id')
+        _table_ = 'group_list'  # указываем название таблицы
+        id = PrimaryKey(int, column='group_id')  # column указывается, когда названия переменных не соответствует атрибутам в таблице
         name = Optional(str, column='group_name')
         header = Optional(str, column='group_header')
         footer = Optional(str, column='group_footer')
         contacts = Set(lambda: ORMFixture.ORMContact, table="address_in_group", column="id", reverse="groups", lazy=True)
-
 
     class ORMContact(db.Entity):
         _table_ = 'group_list'
         id = PrimaryKey(int, column='id')
         firstname = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
-        deprecated = Optional(datetime, column='deprecated')
+        deprecated = Optional(datetime.datetime, column='deprecated')
         groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_group", column="group_id", reverse="contacts", lazy=True)
 
     def __init__(self, host, name, user, password):
         self.db.bind('mysql', host=host, database=name, user=user, password=password, conv=decoders)
-        self.db.generate_mapping()
+        self.db.generate_mapping()  # сопоставление классов с данными в таблицах
 
     def convert_groups_to_model(self, groups):
         def convert(group):

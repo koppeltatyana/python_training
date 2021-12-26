@@ -5,9 +5,10 @@ db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
 
 try:
 
-    l = db.get_contact_not_in_group(Group(id=234))
-    for item in l:
+    lst = db.get_group_list()
+    for item in lst:
         print(item)
-    print(len(l))
+    print(len(lst))
+
 finally:
-    pass #db.destroy()
+    pass
