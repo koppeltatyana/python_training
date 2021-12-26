@@ -13,22 +13,23 @@ class ORMFixture:
     class ORMGroup(db.Entity):
         _table_ = 'group_list'  # указываем название таблицы
         id = PrimaryKey(int, column='group_id')  # column указывается, когда названия переменных не соответствует атрибутам в таблице
-        name = Optional(str, column='group_name')
-        header = Optional(str, column='group_header')
-        footer = Optional(str, column='group_footer')
-        contacts = Set(lambda: ORMFixture.ORMContact, table="address_in_group", column="id", reverse="groups", lazy=True)
+        group_name = Optional(str, column='group_name')
+        group_header = Optional(str, column='group_header')
+        group_footer = Optional(str, column='group_footer')
+        contacts = Set(lambda: ORMFixture.ORMContact, table="address_in_groups", column="id", reverse="groups", lazy=True)
 
     class ORMContact(db.Entity):
-        _table_ = 'group_list'
+        _table_ = 'addressbook'
         id = PrimaryKey(int, column='id')
         firstname = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
-        deprecated = Optional(datetime.datetime, column='deprecated')
-        groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_group", column="group_id", reverse="contacts", lazy=True)
+        deprecated = Optional(str, column='deprecated')
+        groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups", column="group_id", reverse="contacts", lazy=True)
 
     def __init__(self, host, name, user, password):
         self.db.bind('mysql', host=host, database=name, user=user, password=password, conv=decoders)
         self.db.generate_mapping()  # сопоставление классов с данными в таблицах
+        sql_debug(True)
 
     def convert_groups_to_model(self, groups):
         def convert(group):
@@ -46,7 +47,7 @@ class ORMFixture:
 
     @db_session
     def get_contact_list(self):
-        return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None))
+        return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact))  #  if c.deprecated is None
 
     @db_session
     def get_contact_in_group(self, group):
