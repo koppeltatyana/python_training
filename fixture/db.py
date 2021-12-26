@@ -32,25 +32,25 @@ class DbFixture:
         contact_list = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, firstname, lastname  from addressbook where deprecated='0000-00-00 00:00:00'")
+            cursor.execute("select id, firstname, lastname, address, email, email2, email3, "
+                           "home, mobile, work, phone2 from addressbook where deprecated='0000-00-00 00:00:00'")
             for row in cursor:
-                (contact_id, firstname, lastname) = row
-                # , middlename, nickname, company, title,
-                # address, home_number, mobile_number, work_number, fax, email, email2, email3,
-                # homepage, bday, bmonth, byear, aday, amonth, ayear, address2, phone2, notes
-
-                contact_list += [Contact(contact_id=str(contact_id), firstname=firstname, lastname=lastname)]
-                # middlename=middlename, nickname=nickname, company=company, title=title,
-                # address=address, home_number=home_number, mobile_number=mobile_number,
-                # work_number=work_number, fax=fax, email=email, email2=email2, email3=email3,
-                # homepage=homepage, bday=bday, bmonth=bmonth, byear=byear, aday=aday,
-                # amonth=amonth, ayear=ayear, address2=address2, phone2=phone2, notes=notes)
-
-
-
+                (contact_id, firstname, lastname, address, email, email2, email3, home_number, mobile_number, work_number, phone2) = row
+                contact_list += [Contact(contact_id=str(contact_id), firstname=firstname, lastname=lastname, address=address,
+                                         email=email, email2=email2, email3=email3, home_number=home_number, mobile_number=mobile_number,
+                                         work_number=work_number, phone2=phone2)]
         finally:
             cursor.close()
         return contact_list
+
+    def get_contacts_in_groups_list(self):
+        group_list = []
+        cursor = self.connection.cursor()
+        try:
+            pass
+        finally:
+            cursor.close()
+        return group_list
 
     def destroy(self):
         self.connection.close()
