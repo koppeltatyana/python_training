@@ -27,7 +27,7 @@ class ORMFixture:
         groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups", column="group_id", reverse="contacts", lazy=True)
 
     def __init__(self, host, name, user, password):
-        self.db.bind('mysql', host=host, database=name, user=user, password=password, conv=decoders)
+        self.db.bind('mysql', host=host, database=name, user=user, password=password)
         self.db.generate_mapping()  # сопоставление классов с данными в таблицах
         sql_debug(True)
 
@@ -52,10 +52,10 @@ class ORMFixture:
     @db_session
     def get_contact_in_group(self, group):
         orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
-        return self.convert_contacts_to_model(orm_group)
+        return self.convert_contacts_to_model(orm_group.contacts)
 
     @db_session
     def get_contact_not_in_group(self, group):
         orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
         return self.convert_contacts_to_model(
-            select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group not in c.groups))
+            select(c for c in ORMFixture.ORMContact if orm_group not in c.groups))

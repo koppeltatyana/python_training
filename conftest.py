@@ -3,6 +3,7 @@ import json
 import os.path
 from fixture.application import Application
 from fixture.db import DbFixture
+from fixture.orm import ORMFixture
 import importlib
 import jsonpickle
 
@@ -30,6 +31,13 @@ def app(request):  # функция, инициализирующая фикст
         fixture = Application(browser=browser, base_url=web_config['baseUrl'])  # создание фикстуры
     fixture.session.ensure_login(username=web_config['username'], password=web_config['password'])
     return fixture
+
+
+@pytest.fixture(scope='session')
+def orm(request):  # функция, инициализирующая ORM
+    db_config = load_config(request.config.getoption("--target"))["db"]
+    db_fixture = ORMFixture(host=db_config["host"], name=db_config["name"], user=db_config["user"], password=db_config["password"])
+    return db_fixture
 
 
 @pytest.fixture(scope='session')
