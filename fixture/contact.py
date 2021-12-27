@@ -1,5 +1,4 @@
 import re
-
 from selenium.webdriver.support.select import Select
 from model.contact import Contact
 
@@ -73,6 +72,14 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
         self.contact_cache = None
+
+    def add_some_contact_to_some_group(self, contact, group):
+        wd = self.app.wd
+        self.app.return_to_home_page()
+        self.select_contact_by_id(contact.id)
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group.group_name.strip())
+        wd.find_element_by_css_selector("input[name=\"add\"]").click()
+        self.app.return_to_home_page()
 
     #  функция заполнения полей
     def enter_values(self, contact):
