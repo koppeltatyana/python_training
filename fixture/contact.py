@@ -81,6 +81,15 @@ class ContactHelper:
         wd.find_element_by_css_selector("input[name=\"add\"]").click()
         self.app.return_to_home_page()
 
+    def delete_some_contact_from_some_group(self, contact, group):
+        wd = self.app.wd
+        self.app.return_to_home_page()
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group.group_name.strip())
+        self.select_contact_by_id(contact.id)
+        wd.find_element_by_name("remove").click()
+        self.app.return_to_home_page()
+
+
     #  функция заполнения полей
     def enter_values(self, contact):
         self.change_field_value("firstname", contact.firstname)
