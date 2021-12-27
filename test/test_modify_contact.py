@@ -4,7 +4,7 @@ import random
 
 def test_modify_some_contact(app, db, check_ui):
     # добавление проверки: если нет ни одного контакта, то перед удалением создаем
-    if app.contact.count_contacts() == 0:
+    if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(firstname="John"))
     old_contacts = db.get_contact_list()
     random_contact = random.choice(old_contacts)
