@@ -1,11 +1,8 @@
 from model.contact import Contact
-from fixture.db import DbFixture
 import re
 
-db = DbFixture(host="127.0.0.1", name="addressbook", user="root", password="")
 
-
-def test_all_db_contacts_match_ui_contacts(app):
+def test_all_db_contacts_match_ui_contacts(app, db):
     contacts_from_ui = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
     contacts_from_db = sorted(db.get_contact_list(), key=Contact.id_or_max)
     # первоначальная проверка длин списков контактов с ui и db
