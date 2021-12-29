@@ -31,8 +31,6 @@ def test_add_contact_in_group(app, orm):
     while random_contact in old_contacts_in_random_group_list:
         contacts_list.remove(random_contact)
         random_contact = random.choice(contacts_list)
-    print(random_group)
-    print(random_contact)
     # добавляем random_contact в random_group
     app.contact.add_some_contact_to_some_group(random_contact, random_group)
     # новый список контактов, которые содержаться в группе random_group после добавления контакта в группу
