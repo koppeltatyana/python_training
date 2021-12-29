@@ -20,14 +20,19 @@ def test_add_contact_in_group(app, orm):
     # меняем рандомную группу до тех пор, пока не найдем группу, в которой есть не все котакты
     while len(old_contacts_in_random_group_list) == len(contacts_list):
         groups_list.remove(random_group)
-        random_group = random.choice(groups_list)
-        old_contacts_in_random_group_list = orm.get_contact_in_group(random_group)
-
+        if len(groups_list) != 0:
+            random_group = random.choice(groups_list)
+            old_contacts_in_random_group_list = orm.get_contact_in_group(random_group)
+        else:
+            print("Group_list doesn't have other groups")
+            assert True
+            return 0
     # выбираем контакт до тех пор, пока не найдем контакт, который не состоит в random_group
     while random_contact in old_contacts_in_random_group_list:
         contacts_list.remove(random_contact)
         random_contact = random.choice(contacts_list)
-
+    print(random_group)
+    print(random_contact)
     # добавляем random_contact в random_group
     app.contact.add_some_contact_to_some_group(random_contact, random_group)
     # новый список контактов, которые содержаться в группе random_group после добавления контакта в группу
