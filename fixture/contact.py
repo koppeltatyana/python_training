@@ -89,7 +89,6 @@ class ContactHelper:
         wd.find_element_by_name("remove").click()
         self.app.return_to_home_page()
 
-
     #  функция заполнения полей
     def enter_values(self, contact):
         self.change_field_value("firstname", contact.firstname)

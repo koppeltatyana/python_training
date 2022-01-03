@@ -15,7 +15,7 @@ def test_add_contact_in_group(app, orm):
     # рандомная группа для удаления контакта из этой группы
     random_group = random.choice(groups_list)
     # старый список контактов, которые содержаться в группе random_group перед добавлением контакта в группу
-    old_contacts_in_random_group_list = orm.get_contact_in_group(random_group)
+    old_contacts_in_random_group_list = orm.get_contacts_in_group(random_group)
 
     # проверка, что в группе есть контакты, если нет, то добавляем контакт в группу
     if len(old_contacts_in_random_group_list) == 0:
@@ -24,12 +24,12 @@ def test_add_contact_in_group(app, orm):
         random_contact_from_all_contacts = random.choice(contacts_list)
 
         app.contact.add_some_contact_to_some_group(random_contact_from_all_contacts, random_group)
-        old_contacts_in_random_group_list = orm.get_contact_in_group(random_group)
+        old_contacts_in_random_group_list = orm.get_contacts_in_group(random_group)
     # рандомный контакт из списка контактов рандомной группы
     random_contact = random.choice(old_contacts_in_random_group_list)
     # удаляем контакт из группы
     app.contact.delete_some_contact_from_some_group(random_contact, random_group)
-    new_contacts_in_random_group_list = orm.get_contact_in_group(random_group)
+    new_contacts_in_random_group_list = orm.get_contacts_in_group(random_group)
     # убираем контакт из старого списка контактов в группе для сравнения списков
     old_contacts_in_random_group_list.remove(random_contact)
     assert sorted(old_contacts_in_random_group_list, key=Contact.id_or_max) == sorted(new_contacts_in_random_group_list, key=Contact.id_or_max)
