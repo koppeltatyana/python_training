@@ -14,3 +14,15 @@ Scenario Outline: Delete some group
   Given a random group from group list
   When I delete the group from the list
   Then the new group list is equal to the old list without deleted group
+
+
+Scenario Outline: Modify some group
+  Given a group list
+  Given a random group from group list
+  Given a new group with <new_name>, <new_header> and <new_footer>
+  When I modify the group from the list
+  Then the new group list is equal to the old list with modify group
+
+  Examples:
+  | new_name  | new_header  | new_footer  |
+  | new_name1 | new_header1 | new_footer1 |
