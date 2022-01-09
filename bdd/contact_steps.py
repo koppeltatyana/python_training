@@ -49,3 +49,21 @@ def verify_contact_deleted(db, non_empty_contact_list, random_contact):
     new_contacts_list = db.get_contact_list()
     old_contacts_list.remove(random_contact)
     assert sorted(old_contacts_list, key=Contact.id_or_max) == sorted(new_contacts_list, key=Contact.id_or_max)
+
+
+@given('a new contact with <new_firstname>, <new_middlename>, <new_lastname> and <new_address>')
+def new_contact_for_modify(new_firstname, new_middlename, new_lastname, new_address):
+    return Contact(firstname=new_firstname, middlename=new_middlename, lastname=new_lastname, address=new_address)
+
+
+@when('I modify the contact from the list')  # это тоже фикстура
+def modify_some_contact(app, random_contact, new_contact_for_modify):
+    app.contact.modify_contact_by_id(random_contact.id, new_contact_for_modify)
+
+
+@then('the new contact list is equal to the old contact list with modify contact')  # и это тоже фикстура
+def verify_contact_modify(db, non_empty_contact_list, random_contact, new_contact_for_modify):
+    old_contacts_list = non_empty_contact_list
+    new_contacts_list = db.get_contact_list()
+    old_contacts_list[old_contacts_list.index(random_contact)] = new_contact_for_modify
+    assert old_contacts_list == sorted(new_contacts_list, key=Contact.id_or_max)
