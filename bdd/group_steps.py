@@ -33,15 +33,15 @@ def verify_group_added(db, group_list, new_group):
 
 # STEPS FOR DELETE GROUP
 @given('non empty group list')  # эти штуки представляют собой фикстуры, а их можно передавать в кач-ве параметра, что мы сделали в ф-ции verify_group_added
-def group_list(app, db):
+def non_empty_group_list(app, db):
     if len(db.get_group_list()) == 0:
         app.group.create(Group(group_name="name", group_header="header", group_footer="footer"))
     return db.get_group_list()
 
 
-@given('a random group from group list')
-def random_group(group_list):
-    return random.choice(group_list)
+@given('a random group from non empty group list')
+def random_group(non_empty_group_list):
+    return random.choice(non_empty_group_list)
 
 
 @when('I delete the group from the list')  # это тоже фикстура
@@ -50,8 +50,8 @@ def del_some_group(app, random_group):
 
 
 @then('the new group list is equal to the old list without deleted group')  # и это тоже фикстура
-def verify_group_added(db, group_list, random_group):
-    old_groups_list = group_list
+def verify_group_deleted(db, non_empty_group_list, random_group):
+    old_groups_list = non_empty_group_list
     new_groups_list = db.get_group_list()
     old_groups_list.remove(random_group)
     assert sorted(old_groups_list, key=Group.id_or_max) == sorted(new_groups_list, key=Group.id_or_max)
@@ -69,9 +69,13 @@ def modify_some_group(app, random_group, new_group_for_modify):
 
 
 @then('the new group list is equal to the old list with modify group')  # и это тоже фикстура
-def verify_group_added(db, group_list, random_group, new_group_for_modify):
-    old_groups_list = group_list
+def verify_group_modify(db, non_empty_group_list, random_group, new_group_for_modify):
+    old_groups_list = non_empty_group_list
     new_groups_list = db.get_group_list()
-    old_groups_list.remove(random_group)
-    old_groups_list += [new_group_for_modify]
-    assert sorted(old_groups_list, key=Group.id_or_max) == sorted(new_groups_list, key=Group.id_or_max)
+    res_old_groups = []
+    for i in range(len(old_groups_list)):
+        if str(old_groups_list[i].id) != str(random_group.id):
+            res_old_groups += [old_groups_list[i]]
+        if str(old_groups_list[i].id) == str(random_group.id):
+            res_old_groups += [new_group_for_modify]
+    assert res_old_groups == sorted(new_groups_list, key=Group.id_or_max)
