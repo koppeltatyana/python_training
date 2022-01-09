@@ -4,5 +4,10 @@ from .contact_steps import *  # импортируем шаги, чтобы сц
 
 
 @scenario('contacts.feature', 'Add new contact')
-def test_add_new_group():
+def test_add_new_contact():
+    pass
+
+
+@scenario('contacts.feature', 'Delete some contact')
+def test_del_some_contact():
     pass
