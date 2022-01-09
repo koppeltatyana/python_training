@@ -14,5 +14,5 @@ def test_del_some_group():
 
 
 @scenario('groups.feature', 'Modify some group')
-def test_del_some_group():
+def test_modify_some_group():
     pass

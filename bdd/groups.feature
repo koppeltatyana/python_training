@@ -10,14 +10,14 @@ Scenario Outline: Add new group
   | name2 | header2 | footer2 |
 
 Scenario Outline: Delete some group
-  Given a group list
+  Given non empty group list
   Given a random group from group list
   When I delete the group from the list
   Then the new group list is equal to the old list without deleted group
 
 
 Scenario Outline: Modify some group
-  Given a group list
+  Given non empty group list
   Given a random group from group list
   Given a new group with <new_name>, <new_header> and <new_footer>
   When I modify the group from the list
