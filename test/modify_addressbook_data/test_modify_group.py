@@ -11,18 +11,13 @@ def test_modify_some_group(app, db, check_ui):
         old_groups = db.get_group_list()
     with allure.step("Given a random group from non empty group list"):
         random_group = random.choice(old_groups)  # случайным образом выбираем группe для модификации
-    with allure.step("Given a new group with <new_name>, <new_header> and <new_footer>"):
+    with allure.step("Given a new group"):
         new_group = Group(group_name="New Name", group_header="New Header", group_footer="New Footer")
-    with allure.step("When I modify a group {} from the list".format(random_group)):
+    with allure.step("When I modify a group {0} from the list with new data from group {1}".format(random_group, new_group)):
         app.group.modify_group_by_id(random_group.id, new_group)
     with allure.step("Then the new group list is equal to the old list with modify group"):
+        old_groups[old_groups.index(random_group)] = new_group
         new_groups = db.get_group_list()
-        res_old_groups = []
-        for i in range(len(old_groups)):
-            if str(old_groups[i].id) != str(random_group.id):
-                res_old_groups += [old_groups[i]]
-            if str(old_groups[i].id) == str(random_group.id):
-                res_old_groups += [new_group]
-        assert res_old_groups == sorted(new_groups, key=Group.id_or_max)
+        assert old_groups == sorted(new_groups, key=Group.id_or_max)
         if check_ui:
             assert sorted(new_groups, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
