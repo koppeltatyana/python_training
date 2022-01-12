@@ -1,29 +1,41 @@
 from model.contact import Contact
 import re
+import allure
 
 
 def test_all_db_contacts_match_ui_contacts(app, db):
-    contacts_from_ui = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
-    contacts_from_db = sorted(db.get_contact_list(), key=Contact.id_or_max)
+    with allure.step("Given a contact from ui"):
+        contacts_from_ui = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+    with allure.step("Given a contact from db"):
+        contacts_from_db = sorted(db.get_contact_list(), key=Contact.id_or_max)
     # первоначальная проверка длин списков контактов с ui и db
-    assert len(contacts_from_db) == len(contacts_from_ui)
+    with allure.step("Then contacts list's length from db is equal to the contacts list's length from ui"):
+        assert len(contacts_from_db) == len(contacts_from_ui)
 
     for i in range(len(contacts_from_ui)):
         # проверка соответствия имен
-        ui_contact_full_name = merge_first_last_names(contacts_from_ui[i])
-        db_contact_full_name = merge_first_last_names(contacts_from_db[i])
-        assert ui_contact_full_name == db_contact_full_name
+        with allure.step("Given a contact's fullname from ui"):
+            ui_contact_full_name = merge_first_last_names(contacts_from_ui[i])
+        with allure.step("Given a contact's fullname from db"):
+            db_contact_full_name = merge_first_last_names(contacts_from_db[i])
+        with allure.step("Then contact's fullname from db is equal to the contact's fullname from ui"):
+            assert ui_contact_full_name == db_contact_full_name
 
         # проверка соответствия электронных адресов
-        db_contact_emails = merge_emails_like_on_home_page(contacts_from_db[i])
-        assert db_contact_emails == contacts_from_ui[i].all_emails_from_home_page
+        with allure.step("Given contact's emails from db"):
+            db_contact_emails = merge_emails_like_on_home_page(contacts_from_db[i])
+        with allure.step("Then contact's emails from db is equal to the contact's emails from ui"):
+            assert db_contact_emails == contacts_from_ui[i].all_emails_from_home_page
 
         # проверка соответствия телефонов
-        db_contact_phones = clear_number(merge_phones_like_on_home_page(contacts_from_db[i]))
-        assert db_contact_phones == contacts_from_ui[i].all_phones_from_home_page
+        with allure.step("Given contact's phones from db"):
+            db_contact_phones = clear_number(merge_phones_like_on_home_page(contacts_from_db[i]))
+        with allure.step("Then contact's phones from db is equal to the contact's phones from ui"):
+            assert db_contact_phones == contacts_from_ui[i].all_phones_from_home_page
 
         # проверка соответствия адресов
-        assert clear_double_spaces(contacts_from_db[i].address) == clear_double_spaces(contacts_from_ui[i].address)
+        with allure.step("Then contact's addresses from db is equal to the contact's addresses from ui"):
+            assert clear_double_spaces(contacts_from_db[i].address) == clear_double_spaces(contacts_from_ui[i].address)
 
 
 def clear_number(text):
