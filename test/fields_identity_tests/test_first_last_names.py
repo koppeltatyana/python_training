@@ -1,8 +1,12 @@
 from random import randrange
 import allure
+from model.contact import Contact
 
 
-def test_first_last_names_on_home_page(app):
+def test_first_last_names_on_home_page(app, db):
+    if len(db.get_contact_list()) == 0:
+        with allure.step("If contact's list is empty, I'll create a new contact"):
+            app.contact.create(Contact(firstname="NAME"))
     with allure.step("Given an  index for compering"):
         index = randrange(len(app.contact.get_contact_list()))
     with allure.step("Given contact's by index information from home page"):
@@ -13,8 +17,11 @@ def test_first_last_names_on_home_page(app):
         assert merge_first_last_names_for_home_page(contact_from_home_page) == merge_first_last_names_for_home_page(contact_from_edit_page)
 
 
-def test_first_last_names_on_view_page(app):
-    with allure.step("Given an  index for compering"):
+def test_first_last_names_on_view_page(app, db):
+    if len(db.get_contact_list()) == 0:
+        with allure.step("If contact's list is empty, I'll create a new contact"):
+            app.contact.create(Contact(firstname="NAME"))
+    with allure.step("Given an index for compering"):
         index = randrange(len(app.contact.get_contact_list()))
     with allure.step("Given contact's by index information from edit page"):
         contact_from_edit_page = app.contact.get_contact_info_from_edit_page(index)

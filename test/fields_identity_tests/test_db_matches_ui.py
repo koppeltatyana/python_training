@@ -1,5 +1,4 @@
 import allure
-
 from model.group import Group
 from model.contact import Contact
 

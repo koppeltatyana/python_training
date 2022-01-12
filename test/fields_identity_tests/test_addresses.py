@@ -1,8 +1,12 @@
 from random import randrange
 import allure
+from model.contact import Contact
 
 
-def test_address_on_home_page(app):
+def test_address_on_home_page(app, db):
+    if len(db.get_contact_list()) == 0:
+        with allure.step("If contact's list is empty, I'll create a new contact"):
+            app.contact.create(Contact(firstname="NAME"))
     with allure.step("Given an  index for compering"):
         index = randrange(len(app.contact.get_contact_list()))
     with allure.step("Given contact's by index information from home page"):
