@@ -8,7 +8,7 @@ def test_add_group(app, db, check_ui, json_groups):
     with allure.step("Given a group list"):
         old_groups = db.get_group_list()  # сделали чтобы список старых групп читался из БД, а не из ui
     # вместо передачи параметров передаем объект класса Group
-    with allure.step("When I add a group {} to the list".format(group)):
+    with allure.step("When I add a group '{}' to the list".format(group)):
         app.group.create(group)
     with allure.step("Then the new group list is equal to the old list with the added group"):
         new_groups = db.get_group_list()  # сделали чтобы список новых групп читался из БД, а не из ui
