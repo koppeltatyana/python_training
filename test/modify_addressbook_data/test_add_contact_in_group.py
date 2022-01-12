@@ -25,7 +25,7 @@ def test_add_contact_in_group(app, orm):
         old_contacts_in_random_group_list = orm.get_contacts_in_group(random_group)
     with allure.step("I add contact '{0}' to group '{1}'".format(random_contact, random_group)):
         app.contact.add_some_contact_to_some_group(random_contact, random_group)  # добавляем random_contact в random_group
-    with allure.step("Then the new contact list of group is equal to the old contact list of group with add contact"):
+    with allure.step("Then the new contacts list of group is equal to the old contacts list of group with adding contact"):
         new_contacts_in_random_group_list = orm.get_contacts_in_group(random_group)  # новый список контактов, которые содержаться в группе random_group после добавления контакта в группу
         old_contacts_in_random_group_list += [random_contact]
         assert sorted(old_contacts_in_random_group_list, key=Contact.id_or_max) == sorted(new_contacts_in_random_group_list, key=Contact.id_or_max)
