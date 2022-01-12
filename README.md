@@ -19,3 +19,8 @@ Python:
 5. Отчет:
 ![изображение](https://user-images.githubusercontent.com/25736580/149140098-03bd84e8-f360-4300-8a67-9872a973c9da.png)
 
+## Генерация отчетов в Allure
+* py.test --alluredir allure-results test - команда для выполнения тестов из директории test с последующим созданием результатов в папке allure-results
+* D:\Python\allure-2.17.2\bin\allure.bat generate allure-results - генерация отчета, где D:\Python\allure-2.17.2\bin\allure.bat - путь для исполняемого файла Allure, allure-results папка с результатами выполнения тестов
+* D:\Python\allure-2.17.2\bin\allure.bat open allure-report - открыть отчет в веб-интерфейсе
+![изображение](https://user-images.githubusercontent.com/25736580/149185945-9eb0ec7a-7341-46d7-a40c-c215dc4ab349.png)
