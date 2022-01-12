@@ -225,7 +225,7 @@ class ContactHelper:
     def get_all_emails_on_view_page(self, text):
         wd = self.app.wd
         if re.findall("(.*@.+.[ru,com])", text) is not None:
-            emails_from_view_page = re.findall("(.+@.+.[ru,com])", text)  # .group(1)
+            emails_from_view_page = re.findall("(.*@.+.[ru,com])", text)  # .group(1)
         else:
             emails_from_view_page = None
         return emails_from_view_page
