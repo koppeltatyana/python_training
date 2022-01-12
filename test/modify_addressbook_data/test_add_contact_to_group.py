@@ -4,7 +4,7 @@ from model.group import Group
 import random
 
 
-def test_add_contact_in_group(app, orm):
+def test_add_contact_to_group(app, orm):
 
     if len(orm.get_group_list()) == 0:  # проверка наличия групп
         app.group.create(Group(group_name="Name", group_header="Header", group_footer="Footer"))
