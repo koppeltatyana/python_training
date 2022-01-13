@@ -1,46 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.3 (Python 3.9.9 on win32)" generated="20220113 22:17:00.756" rpa="false" schemaversion="2">
-<suite id="s1" name="Group Scenarois" source="D:\PycharmProjects\python_training\rf\group_scenarois.robot">
-<kw name="Init Fixtures" type="SETUP">
-<msg timestamp="20220113 22:17:00.798" level="FAIL">No keyword with name 'Init Fixtures' found.</msg>
-<status status="FAIL" starttime="20220113 22:17:00.798" endtime="20220113 22:17:00.798"/>
+<robot generator="Robot 4.1.3 (Python 3.9.9 on win32)" generated="20220113 23:11:50.643" rpa="false" schemaversion="2">
+<suite id="s1" name="Group Scenarios" source="D:\PycharmProjects\python_training\rf\group_scenarios.robot">
+<kw name="Init Fixtures" library="rf.AddressBook" type="SETUP">
+<status status="PASS" starttime="20220113 23:11:50.864" endtime="20220113 23:11:53.334"/>
 </kw>
 <test id="s1-t1" name="Add new group">
-<status status="FAIL" starttime="20220113 22:17:00.799" endtime="20220113 22:17:00.799">Parent suite setup failed:
-No keyword with name 'Init Fixtures' found.</status>
-</test>
-<kw name="Destroy Fixtures" type="TEARDOWN">
-<msg timestamp="20220113 22:17:00.803" level="FAIL">No keyword with name 'Destroy Fixtures' found.</msg>
-<status status="FAIL" starttime="20220113 22:17:00.803" endtime="20220113 22:17:00.803">No keyword with name 'Destroy Fixtures' found.</status>
+<kw name="Get Group List" library="rf.AddressBook">
+<var>${old_list}</var>
+<msg timestamp="20220113 23:11:53.336" level="INFO">${old_list} = [153: NAME; Header: , Footer: ]</msg>
+<status status="PASS" starttime="20220113 23:11:53.335" endtime="20220113 23:11:53.336"/>
 </kw>
-<status status="FAIL" starttime="20220113 22:17:00.758" endtime="20220113 22:17:00.803">Suite setup failed:
-No keyword with name 'Init Fixtures' found.
-
-Also suite teardown failed:
-No keyword with name 'Destroy Fixtures' found.</status>
+<kw name="New Group" library="rf.AddressBook">
+<var>${group}</var>
+<arg>name1</arg>
+<arg>header1</arg>
+<arg>footer1</arg>
+<msg timestamp="20220113 23:11:53.337" level="INFO">${group} = None: name1; Header: header1, Footer: footer1</msg>
+<status status="PASS" starttime="20220113 23:11:53.336" endtime="20220113 23:11:53.337"/>
+</kw>
+<kw name="Create Group" library="rf.AddressBook">
+<arg>${group}</arg>
+<status status="PASS" starttime="20220113 23:11:53.337" endtime="20220113 23:11:56.606"/>
+</kw>
+<kw name="Get Group List" library="rf.AddressBook">
+<var>${new_list}</var>
+<msg timestamp="20220113 23:11:56.607" level="INFO">${new_list} = [153: NAME; Header: , Footer: , 154: name1; Header: header1, Footer: footer1]</msg>
+<status status="PASS" starttime="20220113 23:11:56.606" endtime="20220113 23:11:56.607"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${old_list}</arg>
+<arg>${group}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220113 23:11:56.607" endtime="20220113 23:11:56.608"/>
+</kw>
+<kw name="Group Lists Should Be Equal" library="rf.AddressBook">
+<arg>${old_list}</arg>
+<arg>${new_list}</arg>
+<status status="PASS" starttime="20220113 23:11:56.608" endtime="20220113 23:11:56.608"/>
+</kw>
+<status status="PASS" starttime="20220113 23:11:53.334" endtime="20220113 23:11:56.608"/>
+</test>
+<test id="s1-t2" name="Delete group">
+<kw name="Get Group List" library="rf.AddressBook">
+<var>${old_list}</var>
+<msg timestamp="20220113 23:11:56.610" level="INFO">${old_list} = [153: NAME; Header: , Footer: , 154: name1; Header: header1, Footer: footer1]</msg>
+<status status="PASS" starttime="20220113 23:11:56.610" endtime="20220113 23:11:56.610"/>
+</kw>
+<kw name="Give Random Group From List" library="rf.AddressBook">
+<var>${group_for_del}</var>
+<arg>${old_list}</arg>
+<msg timestamp="20220113 23:11:56.611" level="INFO">${group_for_del} = 154: name1; Header: header1, Footer: footer1</msg>
+<status status="PASS" starttime="20220113 23:11:56.611" endtime="20220113 23:11:56.611"/>
+</kw>
+<kw name="Delete Group" library="rf.AddressBook">
+<arg>${group_for_del}</arg>
+<status status="PASS" starttime="20220113 23:11:56.612" endtime="20220113 23:11:57.203"/>
+</kw>
+<kw name="Get Group List" library="rf.AddressBook">
+<var>${new_list}</var>
+<msg timestamp="20220113 23:11:57.204" level="INFO">${new_list} = [153: NAME; Header: , Footer: ]</msg>
+<status status="PASS" starttime="20220113 23:11:57.203" endtime="20220113 23:11:57.205"/>
+</kw>
+<kw name="Remove Values From List" library="Collections">
+<arg>${old_list}</arg>
+<arg>${group_for_del}</arg>
+<doc>Removes all occurrences of given ``values`` from ``list``.</doc>
+<status status="PASS" starttime="20220113 23:11:57.207" endtime="20220113 23:11:57.208"/>
+</kw>
+<kw name="Group Lists Should Be Equal" library="rf.AddressBook">
+<arg>${old_list}</arg>
+<arg>${new_list}</arg>
+<status status="PASS" starttime="20220113 23:11:57.208" endtime="20220113 23:11:57.209"/>
+</kw>
+<status status="PASS" starttime="20220113 23:11:56.609" endtime="20220113 23:11:57.209"/>
+</test>
+<test id="s1-t3" name="Modify group">
+<kw name="Get Group List" library="rf.AddressBook">
+<var>${old_list}</var>
+<msg timestamp="20220113 23:11:57.212" level="INFO">${old_list} = [153: NAME; Header: , Footer: ]</msg>
+<status status="PASS" starttime="20220113 23:11:57.211" endtime="20220113 23:11:57.212"/>
+</kw>
+<kw name="Give Random Group From List" library="rf.AddressBook">
+<var>${group_for_modify}</var>
+<arg>${old_list}</arg>
+<msg timestamp="20220113 23:11:57.213" level="INFO">${group_for_modify} = 153: NAME; Header: , Footer: </msg>
+<status status="PASS" starttime="20220113 23:11:57.212" endtime="20220113 23:11:57.213"/>
+</kw>
+<kw name="New Group" library="rf.AddressBook">
+<var>${new_group}</var>
+<arg>name1</arg>
+<arg>header1</arg>
+<arg>footer1</arg>
+<msg timestamp="20220113 23:11:57.213" level="INFO">${new_group} = None: name1; Header: header1, Footer: footer1</msg>
+<status status="PASS" starttime="20220113 23:11:57.213" endtime="20220113 23:11:57.213"/>
+</kw>
+<kw name="Modify Group" library="rf.AddressBook">
+<arg>${group_for_modify}</arg>
+<arg>${new_group}</arg>
+<status status="PASS" starttime="20220113 23:11:57.214" endtime="20220113 23:12:00.224"/>
+</kw>
+<kw name="Get Group List" library="rf.AddressBook">
+<var>${new_list}</var>
+<msg timestamp="20220113 23:12:00.225" level="INFO">${new_list} = [153: name1; Header: header1, Footer: footer1]</msg>
+<status status="PASS" starttime="20220113 23:12:00.224" endtime="20220113 23:12:00.225"/>
+</kw>
+<kw name="Replace Old Group To New Group" library="rf.AddressBook">
+<arg>${old_list}</arg>
+<arg>${group_for_modify}</arg>
+<arg>${new_group}</arg>
+<status status="PASS" starttime="20220113 23:12:00.225" endtime="20220113 23:12:00.225"/>
+</kw>
+<kw name="Group Lists Should Be Equal" library="rf.AddressBook">
+<arg>${old_list}</arg>
+<arg>${new_list}</arg>
+<status status="PASS" starttime="20220113 23:12:00.226" endtime="20220113 23:12:00.226"/>
+</kw>
+<status status="PASS" starttime="20220113 23:11:57.210" endtime="20220113 23:12:00.227"/>
+</test>
+<kw name="Destroy Fixtures" library="rf.AddressBook" type="TEARDOWN">
+<status status="PASS" starttime="20220113 23:12:00.229" endtime="20220113 23:12:02.398"/>
+</kw>
+<status status="PASS" starttime="20220113 23:11:50.645" endtime="20220113 23:12:02.398"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="Group Scenarois">Group Scenarois</stat>
+<stat pass="3" fail="0" skip="0" id="s1" name="Group Scenarios">Group Scenarios</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20220113 22:17:00.794" level="ERROR">Error in file 'D:\PycharmProjects\python_training\rf\group_scenarois.robot' on line 2: Importing library 'D:\PycharmProjects\python_training\rf\AddressBook.py' failed: ModuleNotFoundError: No module named 'model'
-Traceback (most recent call last):
-  File "D:\PycharmProjects\python_training\rf\AddressBook.py", line 3, in &lt;module&gt;
-    from model.group import Group
-PYTHONPATH:
-  D:\PycharmProjects\python_training\env\Scripts\robot.exe
-  D:\Python39\python39.zip
-  D:\Python39\DLLs
-  D:\Python39\lib
-  D:\Python39
-  d:\pycharmprojects\python_training\env
-  d:\pycharmprojects\python_training\env\lib\site-packages</msg>
 </errors>
 </robot>
