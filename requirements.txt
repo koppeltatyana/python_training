@@ -5,6 +5,5 @@ jsonpickle
 pony
 pymysql
 urllib3
-lxml‑4.7.1‑cp39‑cp39‑win_amd64.whl
 allure-pytest
 robotframework
