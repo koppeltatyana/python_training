@@ -3,12 +3,12 @@ from pytest_bdd import given, when, then  # пометки
 from model.contact import Contact
 
 
-@given('a contact list')
+@given('a contact list', target_fixture="contact_list")
 def contact_list(db):
     return db.get_contact_list()
 
 
-@given('a contact with <firstname>, <middlename>, <lastname> and <address>')
+@given('a contact with <firstname>, <middlename>, <lastname> and <address>', target_fixture="new_contact")
 def new_contact(firstname, middlename, lastname, address):
     return Contact(firstname=firstname, middlename=middlename, lastname=lastname, address=address)
 
@@ -26,14 +26,14 @@ def verify_contact_added(db, contact_list, new_contact):
     assert sorted(old_contacts_list, key=Contact.id_or_max) == sorted(new_contacts_list, key=Contact.id_or_max)
 
 
-@given('non empty contact list')
+@given('non empty contact list', target_fixture="non_empty_contact_list")
 def non_empty_contact_list(app, db):
     if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(firstname="firstname"))
     return db.get_contact_list()
 
 
-@given('a random contact from non empty contact list')
+@given('a random contact from non empty contact list', target_fixture="random_contact")
 def random_contact(non_empty_contact_list):
     return random.choice(non_empty_contact_list)
 
@@ -51,7 +51,7 @@ def verify_contact_deleted(db, non_empty_contact_list, random_contact):
     assert sorted(old_contacts_list, key=Contact.id_or_max) == sorted(new_contacts_list, key=Contact.id_or_max)
 
 
-@given('a new contact with <new_firstname>, <new_middlename>, <new_lastname> and <new_address>')
+@given('a new contact with <new_firstname>, <new_middlename>, <new_lastname> and <new_address>', target_fixture="new_contact_for_modify")
 def new_contact_for_modify(new_firstname, new_middlename, new_lastname, new_address):
     return Contact(firstname=new_firstname, middlename=new_middlename, lastname=new_lastname, address=new_address)
 
